@@ -10,10 +10,8 @@ import com.xiezhenyu.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author Tim
@@ -29,6 +27,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean register(UserDo userDo) {
+        userDo.setLastTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        userDo.setJoiningTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         Integer num = userMapper.insert(userDo);
         return num > 0;
     }
@@ -52,6 +52,9 @@ public class UserServiceImpl implements IUserService {
             return CommonResult.errorCommonResult("账号或密码错误");
         }
         redisUser = (UserDo) redisUtil.hget(REDIS_DB_USER_KEY,userDo.getEmail());
+        UserDo lastUser = redisUser.setLastTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        redisUtil.hset(REDIS_DB_USER_KEY,redisUser.getEmail(),lastUser,-1);
+        userMapper.updateById(lastUser);
         Map<String,String> payload = new HashMap<>();
         payload.put("id",redisUser.getId().toString());
         payload.put("email",redisUser.getEmail());
@@ -59,7 +62,7 @@ public class UserServiceImpl implements IUserService {
         payload.put("password",redisUser.getPassword());
         token = JwtUtils.getToken(payload);
         list.add(token);
-        list.add(redisUser.toUserVo());
+        list.add(lastUser.toUserVo());
         commonResult = CommonResult.successCommonResult(list,"登录成功");
         return commonResult;
     }

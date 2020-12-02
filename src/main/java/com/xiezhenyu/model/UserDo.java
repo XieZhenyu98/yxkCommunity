@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * @author Tim
@@ -21,6 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @TableName("user")
 @ToString
+@Accessors(chain = true)
 public class UserDo {
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "id",type = IdType.ID_WORKER)
