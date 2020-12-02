@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiezhenyu.mapper.SonModuleMapper">
+    <resultMap id="SonModuleMap" type="com.xiezhenyu.model.SonModuleDo">
+        <id property="id" column="id"/>
+        <result property="moduleName" column="module_name"/>
+        <result property="info" column="info"/>
+        <result property="userId" column="user_id"/>
+        <result property="sort" column="sort"/>
+        <association property="fatherModule" javaType="com.xiezhenyu.model.FatherModuleDo">
+            <id property="id" column="f_id"/>
+            <result property="moduleName" column="f_name"/>
+            <result property="sort" column="f_sort"/>
+        </association>
+    </resultMap>
+    
+    <sql id="update_start_sql">
+        <if test="moduleName!=null and moduleName!=''">
+            module_name=#{moduleName},
+        </if>
+        <if test="info!=null and info!=''">
+            info=#{info},
+        </if>
+        <if test="userId!=null and userId!=''">
+            user_id= #{userId},
+        </if>
+        <if test="sort!=null and sort!=''">
+            sort=#{sort},
+        </if>
+        <if test="fatherModule!=null and fatherModule!=''">
+            father_module_id= #{fatherModule.id},
+        </if>
+    </sql>
+    
+    <insert id="insert" parameterType="com.xiezhenyu.model.SonModuleDo">
+        insert into
+        son_module(id,module_name,info,user_id,sort,father_module_id)
+        values(#{id},#{moduleName},#{info},#{userId},#{sort},#{fatherModule.id})
+    </insert>
+
+    <select id="selectList" resultMap="SonModuleMap">
+        select
+        s.id,s.module_name,s.info,s.user_id,s.sort,
+        f.id f_id,f.module_name f_name,f.sort f_sort from son_module s
+        JOIN father_module f
+        ON s.father_module_id=f.id
+        LIMIT #{param1},#{param2}
+    </select>
+
+    <select id="selectById" resultMap="SonModuleMap">
+        select
+        s.id,s.module_name,s.info,s.user_id,s.sort,
+        f.id f_id,f.module_name f_name,f.sort f_sort from son_module s
+        JOIN father_module f
+        ON s.father_module_id=f.id
+        where s.id=#{param1}
+    </select>
+    
+    <update id="update" parameterType="com.xiezhenyu.model.SonModuleDo">
+        update son_module
+        <set>
+            <include refid="update_start_sql"></include>
+        </set>
+        where id=#{id}
+    </update>
+    
+</mapper>
