@@ -87,6 +87,13 @@
             <version>3.4.0</version>
         </dependency>
 
+        <!--引入flyway的相关依赖5.2.1-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
