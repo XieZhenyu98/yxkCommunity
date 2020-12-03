@@ -48,4 +48,6 @@ public class UserVo {
     private String joiningTime;
     @TableField("last_time")
     private String lastTime;
+    @TableField("experience")
+    private Long experience;
 }
