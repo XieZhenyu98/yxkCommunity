@@ -49,8 +49,19 @@ public class ContentImpl implements IContentService {
     }
 
     @Override
-    public Page<ContentDo> list(Integer limit, Integer offset) {
-        return contentMapper.selectPage(new Page<ContentDo>(limit, offset), null);
+    public Page<ContentVo> list(Integer limit, Integer offset) {
+        Page<ContentDo> page = contentMapper.selectPage(new Page<ContentDo>(limit, offset), null);
+        List<ContentDo> records = page.getRecords();
+        Page<ContentVo> pageVo = new Page<>();
+        List<ContentVo> list = new ArrayList<>();
+        for (ContentDo contentDo : records){
+            Long sonModuleId = contentDo.getModuleId();
+            Long userId = contentDo.getUserId();
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo());
+            list.add(contentVo);
+        }
+        pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
+        return pageVo;
     }
 
     @Override

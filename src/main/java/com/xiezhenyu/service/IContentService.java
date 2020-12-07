@@ -30,7 +30,7 @@ public interface IContentService {
      * @param offset 偏移值
      * @return
      */
-    public Page<ContentDo> list(Integer limit, Integer offset);
+    public Page<ContentVo> list(Integer limit, Integer offset);
 
     /**
      * 查看指定板块帖子列表
