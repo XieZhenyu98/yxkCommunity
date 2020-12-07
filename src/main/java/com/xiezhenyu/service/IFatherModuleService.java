@@ -1,6 +1,7 @@
 package com.xiezhenyu.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.FatherModuleVo;
 import com.xiezhenyu.model.FatherModuleDo;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public interface IFatherModuleService {
      * @param offset
      * @return
      */
-    public Page<FatherModuleDo> selectList(Integer limit, Integer offset);
+    public Page<FatherModuleVo> selectList(Integer limit, Integer offset);
 
     /**
      * 通过ID查询父板块

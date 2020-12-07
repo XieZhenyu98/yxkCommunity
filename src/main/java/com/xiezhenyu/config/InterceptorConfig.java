@@ -15,6 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(new JwtInterceptor())
                 // 登录接口不用于token验证
                 .excludePathPatterns("/user/login")
+                .excludePathPatterns("/images/**")
                 // 其他非登录接口都需要进行token验证
                 .addPathPatterns("/user/**");
     }

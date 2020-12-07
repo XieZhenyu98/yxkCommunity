@@ -38,7 +38,7 @@
         values(#{id},#{moduleName},#{info},#{userId},#{sort},#{fatherModule.id})
     </insert>
 
-    <select id="selectList" resultMap="SonModuleMap">
+    <select id="selectListPage" resultMap="SonModuleMap">
         select
         s.id,s.module_name,s.info,s.user_id,s.sort,
         f.id f_id,f.module_name f_name,f.sort f_sort from son_module s

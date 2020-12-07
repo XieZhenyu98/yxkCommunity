@@ -53,6 +53,8 @@ public class UserDo {
     private String lastTime;
     @TableField("experience")
     private Long experience;
+    @TableField("level")
+    private Integer level;
     public UserVo toUserVo(){
         return new UserVo().setId(this.getId())
             .setEmail(this.getEmail())
@@ -66,6 +68,7 @@ public class UserDo {
             .setAuthentication(this.getAuthentication())
             .setJoiningTime(this.getJoiningTime())
             .setLastTime(this.getLastTime())
-            .setExperience(this.experience);
+            .setExperience(this.experience)
+            .setLevel(this.level);
     }
 }

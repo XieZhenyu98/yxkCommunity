@@ -2,10 +2,13 @@ package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.model.ContentDo;
 import com.xiezhenyu.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Tim
@@ -43,6 +46,12 @@ public class ContentController {
     public CommonResult listByModuleId(@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset,@PathVariable("module_id")Long module_id){
         Page<ContentDo> page = contentService.listByModuleId(module_id, limit, offset);
         return CommonResult.successCommonResult(page,"查询成功");
+    }
+
+    @GetMapping("/listOfTop")
+    public CommonResult listOfTop(){
+        List<ContentVo> list = contentService.listOfTop();
+        return CommonResult.successCommonResult(list,"查询成功");
     }
 
     @PutMapping("/update")

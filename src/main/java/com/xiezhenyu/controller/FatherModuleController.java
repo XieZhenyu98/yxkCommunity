@@ -2,6 +2,7 @@ package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.FatherModuleVo;
 import com.xiezhenyu.model.FatherModuleDo;
 import com.xiezhenyu.service.IFatherModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class FatherModuleController {
 
     @GetMapping("/select/{limit}/{offset}")
     public CommonResult selectList(@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset){
-        Page<FatherModuleDo> fatherModuleDoPage = fatherModuleService.selectList(limit, offset);
+        Page<FatherModuleVo> fatherModuleDoPage = fatherModuleService.selectList(limit, offset);
         return CommonResult.successCommonResult(fatherModuleDoPage,"查询成功");
     }
 

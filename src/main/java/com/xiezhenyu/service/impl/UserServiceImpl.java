@@ -40,6 +40,7 @@ public class UserServiceImpl implements IUserService {
         String token = null;
         UserDo redisUser = null;
         if(!redisUtil.hHasKey(REDIS_DB_USER_KEY,userDo.getEmail())){
+            System.out.println(userDo.getEmail()+"----"+ userDo.getPassword());
             redisUser = userMapper.selectOne(new QueryWrapper<UserDo>().eq("email",userDo.getEmail()).eq("password",userDo.getPassword()));
             if(redisUser == null){
                 redisUtil.hset(REDIS_DB_USER_KEY,userDo.getEmail(),null,300);

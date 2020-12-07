@@ -1,7 +1,10 @@
 package com.xiezhenyu.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.model.ContentDo;
+
+import java.util.List;
 
 /**
  * @author Tim
@@ -37,6 +40,12 @@ public interface IContentService {
      * @return
      */
     public Page<ContentDo> listByModuleId(Long module_id,Integer limit, Integer offset);
+
+    /**
+     * 查看所有置顶帖子
+     * @return
+     */
+    public List<ContentVo> listOfTop();
 
     /**
      * 修改帖子

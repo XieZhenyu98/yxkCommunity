@@ -6,11 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.xiezhenyu.entity.ContentVo;
+import com.xiezhenyu.entity.UserVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.apache.catalina.User;
 
 /**
  * @author Tim
@@ -57,4 +60,19 @@ public class ContentDo {
     @TableField("money")
     private Integer money;
 
+    public ContentVo toVo(SonModuleDo sonModuleDo, UserVo userVo){
+        ContentVo contentVo = new ContentVo();
+        contentVo.setId(this.id)
+                .setTitle(this.title)
+                .setContent(this.content)
+                .setTime(this.time)
+                .setTimes(this.times)
+                .setTopping(this.topping)
+                .setMarvellous(this.marvellous)
+                .setAdoptReplyId(this.adoptReplyId)
+                .setMoney(this.money)
+                .setSonModule(sonModuleDo)
+                .setUserVo(userVo);
+        return contentVo;
+    }
 }

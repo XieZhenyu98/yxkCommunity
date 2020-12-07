@@ -19,7 +19,6 @@ import lombok.experimental.Accessors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
 @ToString
 @Accessors(chain = true)
 public class UserVo {
@@ -50,4 +49,6 @@ public class UserVo {
     private String lastTime;
     @TableField("experience")
     private Long experience;
+    @TableField("level")
+    private Integer level;
 }

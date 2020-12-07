@@ -46,4 +46,11 @@ public interface ISonModuleService {
      */
     public boolean deleteById(Long id);
 
+    /**
+     * 通过父板块ID查询所有的子版块信息
+     * @param id
+     * @return
+     */
+    public ArrayList<SonModuleDo> selectListByFatherId(Long id);
+
 }

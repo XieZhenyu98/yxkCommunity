@@ -28,7 +28,7 @@ public interface SonModuleMapper extends BaseMapper<SonModuleDo> {
      * @param offset
      * @return
      */
-    public ArrayList<SonModuleDo> selectList(Integer limit,Integer offset);
+    public ArrayList<SonModuleDo> selectListPage(Integer limit,Integer offset);
 
     /**
      * 修改子板块信息
