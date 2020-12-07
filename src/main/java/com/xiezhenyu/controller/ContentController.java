@@ -44,7 +44,7 @@ public class ContentController {
 
     @GetMapping("/{limit}/{offset}/{module_id}")
     public CommonResult listByModuleId(@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset,@PathVariable("module_id")Long module_id){
-        Page<ContentDo> page = contentService.listByModuleId(module_id, limit, offset);
+        Page<ContentVo> page = contentService.listByModuleId(module_id, limit, offset);
         return CommonResult.successCommonResult(page,"查询成功");
     }
 

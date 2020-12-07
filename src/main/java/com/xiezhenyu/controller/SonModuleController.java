@@ -20,7 +20,6 @@ public class SonModuleController {
 
     @PostMapping("/add")
     public CommonResult add(@RequestBody SonModuleDo sonModuleDo){
-        System.out.println(sonModuleDo);
         boolean result = sonModuleService.insert(sonModuleDo);
         if(result){
             return CommonResult.successCommonResult("添加成功");

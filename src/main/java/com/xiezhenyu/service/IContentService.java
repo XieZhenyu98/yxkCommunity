@@ -39,7 +39,7 @@ public interface IContentService {
      * @param module_id 板块id
      * @return
      */
-    public Page<ContentDo> listByModuleId(Long module_id,Integer limit, Integer offset);
+    public Page<ContentVo> listByModuleId(Long module_id,Integer limit, Integer offset);
 
     /**
      * 查看所有置顶帖子

@@ -52,7 +52,6 @@ public class SonModuleImpl implements ISonModuleService {
     public ArrayList<SonModuleDo> selectListByFatherId(Long id) {
         List<SonModuleDo> list = new ArrayList<>();
         list = sonModuleMapper.selectList(new QueryWrapper<SonModuleDo>().eq("father_module_id", id));
-        System.out.println(list.toString());
         return (ArrayList<SonModuleDo>)list;
     }
 }

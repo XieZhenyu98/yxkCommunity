@@ -47,7 +47,6 @@ public class FatherModuleImpl implements IFatherModuleService {
         List<FatherModuleVo> fatherModuleVoList = new ArrayList<>();
         Page<FatherModuleDo> fatherModuleDoPage = fatherModuleMapper.selectPage(new Page<>(limit, offset), null);
         for (FatherModuleDo fatherModuleDo : fatherModuleDoPage.getRecords()){
-            System.out.println(sonModuleService.selectListByFatherId(fatherModuleDo.getId()).toString());
             fatherModuleVoList.add(fatherModuleDo.toVo(sonModuleService.selectListByFatherId(fatherModuleDo.getId())));
         }
         Page page = new Page();
