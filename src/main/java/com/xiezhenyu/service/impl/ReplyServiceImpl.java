@@ -61,7 +61,7 @@ public class ReplyServiceImpl implements IReplyService {
     }
 
     @Override
-    public Integer selectCountByContent(Integer contentId) {
+    public Integer selectCountByContent(Long contentId) {
         Integer num = replyMapper.selectCount(new QueryWrapper<ReplyDo>().eq("content_id", contentId));
         return num;
     }

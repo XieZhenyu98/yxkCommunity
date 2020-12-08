@@ -61,7 +61,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : records){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
             list.add(contentVo);
         }
         pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
@@ -77,7 +77,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : records){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
             list.add(contentVo);
         }
         pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
@@ -91,7 +91,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : toppingList){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
             list.add(contentVo);
         }
         return list;

@@ -66,7 +66,7 @@ public interface IReplyService {
      * @param contentId
      * @return
      */
-    public Integer selectCountByContent(Integer contentId);
+    public Integer selectCountByContent(Long contentId);
 
     /**
      * 通过用户ID查询一共回复数
