@@ -1,7 +1,9 @@
 package com.xiezhenyu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.mapper.UserMapper;
 import com.xiezhenyu.model.UserDo;
 import com.xiezhenyu.service.IUserService;
@@ -92,5 +94,17 @@ public class UserServiceImpl implements IUserService {
         redisUtil.hset(REDIS_DB_USER_KEY,userDo.getEmail(),userDo);
         userMapper.updateById(userDo);
         return true;
+    }
+
+    @Override
+    public Page<UserVo> userListByEx() {
+        Page<UserDo> experience = userMapper.selectPage(new Page<UserDo>(0, 9), new QueryWrapper<UserDo>().orderByDesc("experience"));
+        List<UserVo> list = new ArrayList<UserVo>();
+        Page<UserVo> pageVo = new Page<UserVo>();
+        for(UserDo userDo : experience.getRecords()){
+            list.add(userDo.toUserVo());
+        }
+        pageVo.setRecords(list).setSize(experience.getSize()).setCurrent(experience.getCurrent()).setTotal(experience.getTotal());
+        return pageVo;
     }
 }

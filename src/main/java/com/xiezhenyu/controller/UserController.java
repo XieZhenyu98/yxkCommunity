@@ -1,6 +1,8 @@
 package com.xiezhenyu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.model.UserDo;
 import com.xiezhenyu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,11 @@ public class UserController {
         }else{
             return CommonResult.errorCommonResult("原密码错误，修改失败！");
         }
+    }
+
+    @GetMapping("/userListByEx")
+    public CommonResult userListByEx(){
+        Page<UserVo> userVoPage = userService.userListByEx();
+        return CommonResult.successCommonResult(userVoPage,"查询成功");
     }
 }

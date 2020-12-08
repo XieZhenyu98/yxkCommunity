@@ -1,8 +1,9 @@
 package com.xiezhenyu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.model.UserDo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -52,4 +53,10 @@ public interface IUserService {
      * @return
      */
     public boolean updatePassword(UserDo userDo);
+
+    /**
+     * 通过用户等级查询用户排行
+     * @return
+     */
+    public Page<UserVo> userListByEx();
 }
