@@ -8,6 +8,7 @@ import com.xiezhenyu.mapper.SonModuleMapper;
 import com.xiezhenyu.mapper.UserMapper;
 import com.xiezhenyu.model.ContentDo;
 import com.xiezhenyu.service.IContentService;
+import com.xiezhenyu.service.IReplyService;
 import com.xiezhenyu.service.ISonModuleService;
 import com.xiezhenyu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ContentImpl implements IContentService {
     @Autowired
     private ISonModuleService sonModuleService;
 
+    @Autowired
+    private IReplyService replyService;
+
     @Override
     public boolean add(ContentDo contentDo) {
         contentDo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
@@ -57,7 +61,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : records){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo());
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
             list.add(contentVo);
         }
         pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
@@ -73,7 +77,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : records){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo());
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
             list.add(contentVo);
         }
         pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
@@ -87,7 +91,7 @@ public class ContentImpl implements IContentService {
         for (ContentDo contentDo : toppingList){
             Long sonModuleId = contentDo.getModuleId();
             Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo());
+            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByUser(userId));
             list.add(contentVo);
         }
         return list;

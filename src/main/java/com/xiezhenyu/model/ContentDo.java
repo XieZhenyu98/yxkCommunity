@@ -60,7 +60,7 @@ public class ContentDo {
     @TableField("money")
     private Integer money;
 
-    public ContentVo toVo(SonModuleDo sonModuleDo, UserVo userVo){
+    public ContentVo toVo(SonModuleDo sonModuleDo, UserVo userVo, Integer replyNum){
         ContentVo contentVo = new ContentVo();
         contentVo.setId(this.id)
                 .setTitle(this.title)
@@ -72,7 +72,8 @@ public class ContentDo {
                 .setAdoptReplyId(this.adoptReplyId)
                 .setMoney(this.money)
                 .setSonModule(sonModuleDo)
-                .setUserVo(userVo);
+                .setUserVo(userVo)
+                .setReplyNum(replyNum);
         return contentVo;
     }
 }
