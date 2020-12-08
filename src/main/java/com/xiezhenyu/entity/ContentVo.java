@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.apache.catalina.User;
 
 /**
  * @author Tim
@@ -40,4 +39,5 @@ public class ContentVo {
 
     private Integer money;
 
+    private Integer replyNum;
 }

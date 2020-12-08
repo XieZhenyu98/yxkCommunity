@@ -22,33 +22,32 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class UserVo {
-    @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(value = "id",type = IdType.ID_WORKER)
+
     private Long id;
-    @TableField("email")
+
     private String email;
-    @TableField("username")
+
     private String username;
-    @TableField("sex")
+
     private Byte sex;
-    @TableField("city")
+
     private String city;
-    @TableField("personal_signature")
+
     private String personalSignature;
-    @TableField("image")
+
     private String image;
-    @TableField("activate_mailbox")
+
     private Byte activateMailbox;
-    @TableField("diamonds")
+
     private Integer diamonds;
-    @TableField("authentication")
+
     private String authentication;
-    @TableField("joining_time")
+
     private String joiningTime;
-    @TableField("last_time")
+
     private String lastTime;
-    @TableField("experience")
+
     private Long experience;
-    @TableField("level")
+
     private Integer level;
 }
