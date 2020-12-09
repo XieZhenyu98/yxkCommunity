@@ -36,10 +36,11 @@ public class ContentImpl implements IContentService {
     private IReplyService replyService;
 
     @Override
-    public boolean add(ContentDo contentDo) {
+    public ContentDo add(ContentDo contentDo) {
         contentDo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         int num = contentMapper.insert(contentDo);
-        return num > 0;
+        ContentDo contentDB = contentMapper.selectOne(new QueryWrapper<ContentDo>().eq("user_id", contentDo.getUserId()).orderByDesc("time").last("limit 1"));
+        return contentDB;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ContentImpl implements IContentService {
         ContentDo contentDo = contentMapper.selectById(id);
         ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(contentDo.getModuleId()), userService.getUserById(contentDo.getUserId()).toUserVo(), replyService.selectCountByUser(contentDo.getUserId()));
         Long times = contentDo.getTimes()+1;
-        contentMapper.updateById(new ContentDo().setTimes(times).setId(id));
+        contentMapper.updateById(contentDo.setTimes(times));
         return contentVo;
     }
 

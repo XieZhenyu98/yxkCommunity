@@ -22,12 +22,8 @@ public class ContentController {
 
     @PostMapping("/add")
     public CommonResult add(@RequestBody ContentDo contentDo){
-        boolean result = contentService.add(contentDo);
-        if (result){
-            return CommonResult.successCommonResult("添加成功");
-        }else {
-            return CommonResult.errorCommonResult("添加失败");
-        }
+        ContentDo result = contentService.add(contentDo);
+        return CommonResult.successCommonResult(result,"插入成功");
     }
 
     @GetMapping("/{id}")

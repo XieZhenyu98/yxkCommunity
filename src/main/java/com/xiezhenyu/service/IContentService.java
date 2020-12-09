@@ -15,7 +15,7 @@ public interface IContentService {
      * @param contentDo
      * @return
      */
-    public boolean add(ContentDo contentDo);
+    public ContentDo add(ContentDo contentDo);
 
     /**
      * 通过id查找帖子
