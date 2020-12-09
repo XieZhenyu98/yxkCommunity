@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 public class ContentDo {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(value = "id",type = IdType.ID_WORKER)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     @TableField("module_id")

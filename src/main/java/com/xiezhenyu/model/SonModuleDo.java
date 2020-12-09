@@ -22,7 +22,7 @@ import lombok.ToString;
 public class SonModuleDo {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(value = "id",type = IdType.ID_WORKER)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     @TableField("module_name")

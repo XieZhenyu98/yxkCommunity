@@ -42,8 +42,8 @@ public class FatherModuleController {
 
     @GetMapping("/select/{limit}/{offset}")
     public CommonResult selectList(@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset){
-        Page<FatherModuleVo> fatherModuleDoPage = fatherModuleService.selectList(limit, offset);
-        return CommonResult.successCommonResult(fatherModuleDoPage,"查询成功");
+        Page<FatherModuleVo> fatherModuleVoPage = fatherModuleService.selectList(limit, offset);
+        return CommonResult.successCommonResult(fatherModuleVoPage,"查询成功");
     }
 
     @GetMapping("/select/{id}")

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class FatherModuleDo {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(value = "id",type = IdType.ID_WORKER)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     @TableField("module_name")

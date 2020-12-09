@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserDo {
     @JsonSerialize(using = ToStringSerializer.class)
-    @TableId(value = "id",type = IdType.ID_WORKER)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
     @TableField("email")
     private String email;
