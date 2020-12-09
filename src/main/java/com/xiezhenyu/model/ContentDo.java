@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.xiezhenyu.entity.ContentVo;
+import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.entity.UserVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -59,7 +60,7 @@ public class ContentDo {
     @TableField("money")
     private Integer money;
 
-    public ContentVo toVo(SonModuleDo sonModuleDo, UserVo userVo, Integer replyNum){
+    public ContentVo toVo(SonModuleVo sonModuleVo, UserVo userVo, Integer replyNum){
         ContentVo contentVo = new ContentVo();
         contentVo.setId(this.id)
                 .setTitle(this.title)
@@ -70,7 +71,7 @@ public class ContentDo {
                 .setMarvellous(this.marvellous)
                 .setAdoptReplyId(this.adoptReplyId)
                 .setMoney(this.money)
-                .setSonModule(sonModuleDo)
+                .setSonModule(sonModuleVo)
                 .setUserVo(userVo)
                 .setReplyNum(replyNum);
         return contentVo;

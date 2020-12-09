@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.xiezhenyu.mapper.SonModuleMapper">
-    <resultMap id="SonModuleMap" type="com.xiezhenyu.model.SonModuleDo">
+    <resultMap id="SonModuleMap" type="com.xiezhenyu.entity.SonModuleVo">
         <id property="id" column="id"/>
         <result property="moduleName" column="module_name"/>
         <result property="info" column="info"/>
@@ -32,7 +32,7 @@
         </if>
     </sql>
     
-    <insert id="insert" parameterType="com.xiezhenyu.model.SonModuleDo">
+    <insert id="insert" parameterType="com.xiezhenyu.entity.SonModuleVo">
         insert into
         son_module(id,module_name,info,user_id,sort,father_module_id)
         values(#{id},#{moduleName},#{info},#{userId},#{sort},#{fatherModule.id})
@@ -56,7 +56,7 @@
         where s.id=#{param1}
     </select>
     
-    <update id="update" parameterType="com.xiezhenyu.model.SonModuleDo">
+    <update id="update" parameterType="com.xiezhenyu.entity.SonModuleVo">
         update son_module
         <set>
             <include refid="update_start_sql"></include>

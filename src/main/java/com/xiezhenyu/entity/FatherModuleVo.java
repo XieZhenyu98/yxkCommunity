@@ -1,6 +1,5 @@
 package com.xiezhenyu.entity;
 
-import com.xiezhenyu.model.SonModuleDo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +24,5 @@ public class FatherModuleVo {
 
     private Integer sort;
 
-    private ArrayList<SonModuleDo> sonModuleList;
+    private ArrayList<SonModuleVo> sonModuleList;
 }

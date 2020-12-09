@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.xiezhenyu.entity.FatherModuleVo;
+import com.xiezhenyu.entity.SonModuleVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,7 @@ public class FatherModuleDo {
     @TableField("sort")
     private Integer sort;
 
-    public FatherModuleVo toVo(ArrayList<SonModuleDo> list){
+    public FatherModuleVo toVo(ArrayList<SonModuleVo> list){
         FatherModuleVo fatherModuleVo = new FatherModuleVo();
         fatherModuleVo.setId(this.getId())
                 .setModuleName(this.getModuleName())

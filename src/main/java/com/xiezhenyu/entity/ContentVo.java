@@ -1,6 +1,5 @@
 package com.xiezhenyu.entity;
 
-import com.xiezhenyu.model.SonModuleDo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,15 +18,11 @@ public class ContentVo {
 
     private Long id;
 
-    private SonModuleDo sonModule;
-
     private String title;
 
     private String content;
 
     private String time;
-
-    private UserVo userVo;
 
     private Long times;
 
@@ -40,4 +35,9 @@ public class ContentVo {
     private Integer money;
 
     private Integer replyNum;
+
+    private UserVo userVo;
+
+    private SonModuleVo sonModule;
+
 }

@@ -2,7 +2,7 @@ package com.xiezhenyu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xiezhenyu.mapper.SonModuleMapper;
-import com.xiezhenyu.model.SonModuleDo;
+import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.service.ISonModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,25 +20,25 @@ public class SonModuleImpl implements ISonModuleService {
     private SonModuleMapper sonModuleMapper;
 
     @Override
-    public boolean insert(SonModuleDo sonModuleDo) {
-        int num = sonModuleMapper.insert(sonModuleDo);
+    public boolean insert(SonModuleVo sonModuleVo) {
+        int num = sonModuleMapper.insert(sonModuleVo);
         return num > 0;
     }
 
     @Override
-    public ArrayList<SonModuleDo> selectList(Integer limit,Integer offset) {
-        ArrayList<SonModuleDo> sonModuleDos = sonModuleMapper.selectListPage(limit,offset);
-        return sonModuleDos;
+    public ArrayList<SonModuleVo> selectList(Integer limit, Integer offset) {
+        ArrayList<SonModuleVo> sonModuleVos = sonModuleMapper.selectListPage(limit,offset);
+        return sonModuleVos;
     }
 
     @Override
-    public boolean update(SonModuleDo sonModuleDo) {
-        int sum = sonModuleMapper.update(sonModuleDo);
+    public boolean update(SonModuleVo sonModuleVo) {
+        int sum = sonModuleMapper.update(sonModuleVo);
         return sum > 0;
     }
 
     @Override
-    public SonModuleDo selectById(Long id) {
+    public SonModuleVo selectById(Long id) {
         return sonModuleMapper.selectById(id);
     }
 
@@ -49,9 +49,9 @@ public class SonModuleImpl implements ISonModuleService {
     }
 
     @Override
-    public ArrayList<SonModuleDo> selectListByFatherId(Long id) {
-        List<SonModuleDo> list = new ArrayList<>();
-        list = sonModuleMapper.selectList(new QueryWrapper<SonModuleDo>().eq("father_module_id", id));
-        return (ArrayList<SonModuleDo>)list;
+    public ArrayList<SonModuleVo> selectListByFatherId(Long id) {
+        List<SonModuleVo> list = new ArrayList<>();
+        list = sonModuleMapper.selectList(new QueryWrapper<SonModuleVo>().eq("father_module_id", id));
+        return (ArrayList<SonModuleVo>)list;
     }
 }

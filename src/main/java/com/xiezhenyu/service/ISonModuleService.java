@@ -1,6 +1,6 @@
 package com.xiezhenyu.service;
 
-import com.xiezhenyu.model.SonModuleDo;
+import com.xiezhenyu.entity.SonModuleVo;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,10 @@ public interface ISonModuleService {
 
     /**
      * 添加子版块
-     * @param sonModuleDo
+     * @param sonModuleVo
      * @return
      */
-    public boolean insert(SonModuleDo sonModuleDo);
+    public boolean insert(SonModuleVo sonModuleVo);
 
     /**
      * 查询所有子版块
@@ -23,21 +23,21 @@ public interface ISonModuleService {
      * @param offset
      * @return
      */
-    public ArrayList<SonModuleDo> selectList(Integer limit,Integer offset);
+    public ArrayList<SonModuleVo> selectList(Integer limit, Integer offset);
 
     /**
      * 修改子版块信息
-     * @param sonModuleDo
+     * @param sonModuleVo
      * @return
      */
-    public boolean update(SonModuleDo sonModuleDo);
+    public boolean update(SonModuleVo sonModuleVo);
 
     /**
      * 通过ID查询子版块信息
      * @param id
      * @return
      */
-    public SonModuleDo selectById(Long id);
+    public SonModuleVo selectById(Long id);
 
     /**
      * 通过ID删除子版块
@@ -51,6 +51,6 @@ public interface ISonModuleService {
      * @param id
      * @return
      */
-    public ArrayList<SonModuleDo> selectListByFatherId(Long id);
+    public ArrayList<SonModuleVo> selectListByFatherId(Long id);
 
 }

@@ -1,7 +1,7 @@
 package com.xiezhenyu.controller;
 
 import com.xiezhenyu.common.response.CommonResult;
-import com.xiezhenyu.model.SonModuleDo;
+import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.service.ISonModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +19,8 @@ public class SonModuleController {
     private ISonModuleService sonModuleService;
 
     @PostMapping("/add")
-    public CommonResult add(@RequestBody SonModuleDo sonModuleDo){
-        boolean result = sonModuleService.insert(sonModuleDo);
+    public CommonResult add(@RequestBody SonModuleVo sonModuleVo){
+        boolean result = sonModuleService.insert(sonModuleVo);
         if(result){
             return CommonResult.successCommonResult("添加成功");
         }else {
@@ -30,13 +30,13 @@ public class SonModuleController {
 
     @GetMapping("/list/{limit}/{offset}")
     public CommonResult selectList(@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset){
-        ArrayList<SonModuleDo> sonModuleDos = sonModuleService.selectList(limit,offset);
-        return CommonResult.successCommonResult(sonModuleDos,"查询成功");
+        ArrayList<SonModuleVo> sonModuleVos = sonModuleService.selectList(limit,offset);
+        return CommonResult.successCommonResult(sonModuleVos,"查询成功");
     }
 
     @PutMapping("/update")
-    public CommonResult update(@RequestBody SonModuleDo sonModuleDo){
-        boolean result = sonModuleService.update(sonModuleDo);
+    public CommonResult update(@RequestBody SonModuleVo sonModuleVo){
+        boolean result = sonModuleService.update(sonModuleVo);
         if(result){
             return CommonResult.successCommonResult("修改成功");
         }else{
@@ -46,8 +46,8 @@ public class SonModuleController {
 
     @GetMapping("/{id}")
     public CommonResult selectById(@PathVariable("id")Long id){
-        SonModuleDo sonModuleDo = sonModuleService.selectById(id);
-        return CommonResult.successCommonResult(sonModuleDo,"查询成功");
+        SonModuleVo sonModuleVo = sonModuleService.selectById(id);
+        return CommonResult.successCommonResult(sonModuleVo,"查询成功");
     }
 
     @DeleteMapping("/delete/{id}")

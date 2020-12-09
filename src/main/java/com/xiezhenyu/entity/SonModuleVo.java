@@ -1,4 +1,4 @@
-package com.xiezhenyu.model;
+package com.xiezhenyu.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.xiezhenyu.model.FatherModuleDo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.ToString;
 @Data
 @TableName("son_module")
 @ToString
-public class SonModuleDo {
+public class SonModuleVo {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "id",type = IdType.AUTO)
