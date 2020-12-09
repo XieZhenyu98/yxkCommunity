@@ -22,7 +22,7 @@ public interface IContentService {
      * @param id
      * @return
      */
-    public ContentDo getContentById(Long id);
+    public ContentVo getContentById(Long id);
 
     /**
      * 查看所有帖子列表

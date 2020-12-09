@@ -43,11 +43,12 @@ public class ContentImpl implements IContentService {
     }
 
     @Override
-    public ContentDo getContentById(Long id) {
+    public ContentVo getContentById(Long id) {
         ContentDo contentDo = contentMapper.selectById(id);
+        ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(contentDo.getModuleId()), userService.getUserById(contentDo.getUserId()).toUserVo(), replyService.selectCountByUser(contentDo.getUserId()));
         Long times = contentDo.getTimes()+1;
         contentMapper.updateById(new ContentDo().setTimes(times).setId(id));
-        return contentDo;
+        return contentVo;
     }
 
     @Override

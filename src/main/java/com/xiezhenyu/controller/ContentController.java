@@ -32,7 +32,7 @@ public class ContentController {
 
     @GetMapping("/{id}")
     public CommonResult getContentById(@PathVariable("id") Long id){
-        ContentDo content = contentService.getContentById(id);
+        ContentVo content = contentService.getContentById(id);
         return CommonResult.successCommonResult(content,"查询成功");
     }
 
