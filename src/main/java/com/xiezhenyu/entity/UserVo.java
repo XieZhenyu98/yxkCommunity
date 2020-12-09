@@ -1,5 +1,6 @@
 package com.xiezhenyu.entity;
 
+import com.xiezhenyu.model.UserDo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
