@@ -5,8 +5,8 @@
         <id property="id" column="id"/>
         <result property="moduleName" column="module_name"/>
         <result property="sort" column="sort"/>
-        <collection property="sonModuleList" javaType="ArrayList" ofType="com.xiezhenyu.entity.SonModuleVo">
-            <id property="id" column="id"/>
+        <collection property="sonModuleList" ofType="com.xiezhenyu.entity.SonModuleVo">
+            <id property="id" column="s_id"/>
             <result property="moduleName" column="s_module_name"/>
             <result property="info" column="s_info"/>
             <result property="userId" column="s_user_id"/>
@@ -14,12 +14,12 @@
         </collection>
     </resultMap>
 
-    <select id="selectListFatherModuleVo" resultMap="FatherModuleVoMap">
+    <select id="selectListFatherModuleVo" resultMap="FatherModuleVoMap" resultType="java.util.ArrayList">
         select
         f.id,f.module_name,f.sort,
         s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort
-        from father_module f,son_module s
-        where f.id = s.father_module_id
+        from father_module f join son_module s
+        on f.id = s.father_module_id where f.id = s.father_module_id
         limit #{param1},#{param2}
     </select>
 

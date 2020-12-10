@@ -12,6 +12,7 @@
         <result property="marvellous" column="marvellous"/>
         <result property="money" column="money"/>
         <result property="adoptReplyId" column="adopt_reply_id"/>
+        <result property="replyNum" column="count_reply"/>
         <association property="userVo" javaType="com.xiezhenyu.entity.UserVo">
             <id property="id" column="u_id"/>
             <result property="email" column="u_email"/>
@@ -36,16 +37,42 @@
         </association>
     </resultMap>
 
+    <sql id="select_list">
+        <if test="contentVo != null and contentVo.topping != null">
+            and c.topping = #{contentVo.topping}
+        </if>
+        <if test="contentVo != null and contentVo.sonModule != null">
+            and c.module_id = #{contentVo.sonModule.id}
+        </if>
+        <if test="param1 != null and param2 != null">
+            limit #{param1},#{param2}
+        </if>
+    </sql>
+
     <select id="selectListVo" resultMap="ContentVoMap">
         select
-        c.id,c.title,c.content,c.time,c.topping,c.marvellous,c.adopt_reply_id,c.money,
+        c.id,c.title,c.content,c.time,c.times,c.topping,c.marvellous,c.adopt_reply_id,c.money,
         u.id u_id,u.email u_email,u.username u_username,u.sex u_sex,u.city u_city,u.personal_signature u_personal_signature,
         u.image u_image,u.activate_mailbox u_activate_mailbox,u.diamonds u_diamonds,u.authentication u_authentication,
         u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,
-        s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort
+        s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort,
+        (select count(*) from reply where c.id = reply.content_id) count_reply
         from content c,user u,son_module s
         where c.user_id=u.id and c.module_id=s.id
-        limit #{param1},#{param2}
+        <include refid="select_list"></include>
+    </select>
+
+    <select id="selectContentById" resultMap="ContentVoMap">
+        select
+        c.id,c.title,c.content,c.time,c.times,c.topping,c.marvellous,c.adopt_reply_id,c.money,
+        u.id u_id,u.email u_email,u.username u_username,u.sex u_sex,u.city u_city,u.personal_signature u_personal_signature,
+        u.image u_image,u.activate_mailbox u_activate_mailbox,u.diamonds u_diamonds,u.authentication u_authentication,
+        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,
+        s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort,
+        (select count(*) from reply where c.id = reply.content_id) count_reply
+        from content c,user u,son_module s
+        where c.user_id=u.id and c.module_id=s.id
+        and c.id = #{contentVo.id}
     </select>
 
 </mapper>

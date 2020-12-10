@@ -3,6 +3,7 @@ package com.xiezhenyu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.ContentVo;
+import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.mapper.ContentMapper;
 import com.xiezhenyu.model.ContentDo;
 import com.xiezhenyu.service.IContentService;
@@ -45,41 +46,33 @@ public class ContentImpl implements IContentService {
 
     @Override
     public ContentVo getContentById(Long id) {
-        ContentDo contentDo = contentMapper.selectById(id);
-        ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(contentDo.getModuleId()), userService.getUserById(contentDo.getUserId()).toUserVo(), replyService.selectCountByUser(contentDo.getUserId()));
-        Long times = contentDo.getTimes()+1;
-        contentMapper.updateById(contentDo.setTimes(times));
-        return contentVo;
+//        ContentDo contentDo = contentMapper.selectById(id);
+//        ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(contentDo.getModuleId()), userService.getUserById(contentDo.getUserId()).toUserVo(), replyService.selectCountByUser(contentDo.getUserId()));
+//        Long times = contentDo.getTimes()+1;
+//        contentMapper.updateById(contentDo.setTimes(times));
+        ContentVo contentVo = new ContentVo();
+        contentVo.setId(id);
+        ContentVo contentVod = contentMapper.selectContentById(contentVo);
+        return contentVod;
     }
 
 
     @Override
     public Page<ContentVo> listByModuleId(Long module_id, Integer limit, Integer offset) {
-        Page<ContentDo> page = contentMapper.selectPage(new Page<ContentDo>(limit, offset), new QueryWrapper<ContentDo>().eq("module_id", module_id));
-        List<ContentDo> records = page.getRecords();
-        Page<ContentVo> pageVo = new Page<>();
-        List<ContentVo> list = new ArrayList<>();
-        for (ContentDo contentDo : records){
-            Long sonModuleId = contentDo.getModuleId();
-            Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
-            list.add(contentVo);
-        }
-        pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
+        SonModuleVo sonModuleVo = new SonModuleVo();
+        sonModuleVo.setId(module_id);
+        ContentVo contentVo = new ContentVo();
+        contentVo.setSonModule(sonModuleVo);
+        ArrayList<ContentVo> contentVos = contentMapper.selectListVo(limit, offset, contentVo);
+        Page<ContentVo> pageVo = new Page<>(limit,offset);
+        pageVo.setRecords(contentVos);
         return pageVo;
     }
 
     @Override
     public List<ContentVo> listOfTop() {
-        List<ContentVo> list = new ArrayList<>();
-        List<ContentDo> toppingList = contentMapper.selectList(new QueryWrapper<ContentDo>().eq("topping", 1));
-        for (ContentDo contentDo : toppingList){
-            Long sonModuleId = contentDo.getModuleId();
-            Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
-            list.add(contentVo);
-        }
-        return list;
+        ArrayList<ContentVo> contentVos = contentMapper.selectListVo(null, null, new ContentVo().setTopping((byte) 1));
+        return contentVos;
     }
 
 
@@ -101,7 +94,7 @@ public class ContentImpl implements IContentService {
 
     @Override
     public ArrayList<ContentVo> selectListVo(Integer limit, Integer offset) {
-        ArrayList<ContentVo> contentVos = contentMapper.selectListVo(limit, offset);
+        ArrayList<ContentVo> contentVos = contentMapper.selectListVo(limit, offset,null);
         return contentVos;
     }
 

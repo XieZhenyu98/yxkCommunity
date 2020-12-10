@@ -44,12 +44,7 @@ public class FatherModuleImpl implements IFatherModuleService {
 
     @Override
     public Page<FatherModuleVo> selectList(Integer limit, Integer offset) {
-//        Page<FatherModuleDo> fatherModuleDoPage = fatherModuleMapper.selectPage(new Page<>(limit, offset), null);
-//        for (FatherModuleDo fatherModuleDo : fatherModuleDoPage.getRecords()){
-//            fatherModuleVoList.add(fatherModuleDo.toVo(sonModuleService.selectListByFatherId(fatherModuleDo.getId())));
-//        }
         Page page = new Page();
-//        page.setRecords(fatherModuleVoList);
         ArrayList<FatherModuleVo> fatherModuleVos = fatherModuleMapper.selectListFatherModuleVo(limit, offset);
         page.setRecords(fatherModuleVos);
         return page;
