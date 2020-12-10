@@ -27,6 +27,7 @@
             <result property="lastTime" column="u_last_time"/>
             <result property="experience" column="u_experience"/>
             <result property="level" column="u_level"/>
+            <result property="username" column="u_username"/>
         </association>
         <association property="sonModule" javaType="com.xiezhenyu.entity.SonModuleVo">
             <id property="id" column="s_id"/>
@@ -54,7 +55,7 @@
         c.id,c.title,c.content,c.time,c.times,c.topping,c.marvellous,c.adopt_reply_id,c.money,
         u.id u_id,u.email u_email,u.username u_username,u.sex u_sex,u.city u_city,u.personal_signature u_personal_signature,
         u.image u_image,u.activate_mailbox u_activate_mailbox,u.diamonds u_diamonds,u.authentication u_authentication,
-        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,
+        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,u.username u_username,
         s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort,
         (select count(*) from reply where c.id = reply.content_id) count_reply
         from content c,user u,son_module s
@@ -67,7 +68,7 @@
         c.id,c.title,c.content,c.time,c.times,c.topping,c.marvellous,c.adopt_reply_id,c.money,
         u.id u_id,u.email u_email,u.username u_username,u.sex u_sex,u.city u_city,u.personal_signature u_personal_signature,
         u.image u_image,u.activate_mailbox u_activate_mailbox,u.diamonds u_diamonds,u.authentication u_authentication,
-        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,
+        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,u.username u_username,
         s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort,
         (select count(*) from reply where c.id = reply.content_id) count_reply
         from content c,user u,son_module s
