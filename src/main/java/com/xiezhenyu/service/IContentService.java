@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.model.ContentDo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,14 +24,6 @@ public interface IContentService {
      * @return
      */
     public ContentVo getContentById(Long id);
-
-    /**
-     * 查看所有帖子列表
-     * @param limit  分页大小
-     * @param offset 偏移值
-     * @return
-     */
-    public Page<ContentVo> list(Integer limit, Integer offset);
 
     /**
      * 查看指定板块帖子列表
@@ -61,4 +54,11 @@ public interface IContentService {
      */
     public boolean deleteContentById(Long id);
 
+    /**
+     * 查看所有帖子
+     * @param limit
+     * @param offset
+     * @return
+     */
+    public ArrayList<ContentVo> selectListVo(Integer limit, Integer offset);
 }

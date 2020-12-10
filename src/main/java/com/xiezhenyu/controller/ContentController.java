@@ -35,7 +35,9 @@ public class ContentController {
 
     @GetMapping("/{limit}/{offset}")
     public CommonResult list(@PathVariable("limit") Integer limit,@PathVariable("offset") Integer offset){
-        Page<ContentVo> page = contentService.list(limit, offset);
+        Page<ContentVo> page = new Page<>(limit,offset);
+        ArrayList<ContentVo> contentVos = contentService.selectListVo(limit, offset);
+        page.setRecords(contentVos);
         return CommonResult.successCommonResult(page,"查询成功");
     }
 

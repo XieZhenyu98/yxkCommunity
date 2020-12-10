@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiezhenyu.mapper.ContentMapper">
+    <resultMap id="ContentVoMap" type="com.xiezhenyu.entity.ContentVo">
+        <id property="id" column="id"/>
+        <result property="moduleName" column="module_name"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="time" column="time"/>
+        <result property="times" column="times"/>
+        <result property="topping" column="topping"/>
+        <result property="marvellous" column="marvellous"/>
+        <result property="money" column="money"/>
+        <result property="adoptReplyId" column="adopt_reply_id"/>
+        <association property="userVo" javaType="com.xiezhenyu.entity.UserVo">
+            <id property="id" column="u_id"/>
+            <result property="email" column="u_email"/>
+            <result property="sex" column="u_sex"/>
+            <result property="city" column="u_city"/>
+            <result property="personalSignature" column="u_personal_signature"/>
+            <result property="image" column="u_image"/>
+            <result property="activateMailbox" column="u_activate_mailbox"/>
+            <result property="diamonds" column="u_diamonds"/>
+            <result property="authentication" column="u_authentication"/>
+            <result property="joiningTime" column="u_joining_time"/>
+            <result property="lastTime" column="u_last_time"/>
+            <result property="experience" column="u_experience"/>
+            <result property="level" column="u_level"/>
+        </association>
+        <association property="sonModule" javaType="com.xiezhenyu.entity.SonModuleVo">
+            <id property="id" column="s_id"/>
+            <result property="moduleName" column="s_module_name"/>
+            <result property="info" column="s_info"/>
+            <result property="userId" column="s_user_id"/>
+            <result property="sort" column="s_sort"/>
+        </association>
+    </resultMap>
+
+    <select id="selectListVo" resultMap="ContentVoMap">
+        select
+        c.id,c.title,c.content,c.time,c.topping,c.marvellous,c.adopt_reply_id,c.money,
+        u.id u_id,u.email u_email,u.username u_username,u.sex u_sex,u.city u_city,u.personal_signature u_personal_signature,
+        u.image u_image,u.activate_mailbox u_activate_mailbox,u.diamonds u_diamonds,u.authentication u_authentication,
+        u.joining_time u_joining_time,u.experience u_experience,u.`level` u_level,
+        s.id s_id,s.module_name s_module_name,s.info s_info,s.user_id s_user_id,s.sort s_sort
+        from content c,user u,son_module s
+        where c.user_id=u.id and c.module_id=s.id
+        limit #{param1},#{param2}
+    </select>
+
+</mapper>

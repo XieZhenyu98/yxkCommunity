@@ -52,21 +52,6 @@ public class ContentImpl implements IContentService {
         return contentVo;
     }
 
-    @Override
-    public Page<ContentVo> list(Integer limit, Integer offset) {
-        Page<ContentDo> page = contentMapper.selectPage(new Page<ContentDo>(limit, offset), null);
-        List<ContentDo> records = page.getRecords();
-        Page<ContentVo> pageVo = new Page<>();
-        List<ContentVo> list = new ArrayList<>();
-        for (ContentDo contentDo : records){
-            Long sonModuleId = contentDo.getModuleId();
-            Long userId = contentDo.getUserId();
-            ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(sonModuleId),userService.getUserById(userId).toUserVo(),replyService.selectCountByContent(contentDo.getId()));
-            list.add(contentVo);
-        }
-        pageVo.setRecords(list).setTotal(page.getTotal()).setCurrent(page.getCurrent()).setSize(page.getSize());
-        return pageVo;
-    }
 
     @Override
     public Page<ContentVo> listByModuleId(Long module_id, Integer limit, Integer offset) {
@@ -112,6 +97,12 @@ public class ContentImpl implements IContentService {
     public boolean deleteContentById(Long id) {
         int num = contentMapper.deleteById(id);
         return num > 0;
+    }
+
+    @Override
+    public ArrayList<ContentVo> selectListVo(Integer limit, Integer offset) {
+        ArrayList<ContentVo> contentVos = contentMapper.selectListVo(limit, offset);
+        return contentVos;
     }
 
 }
