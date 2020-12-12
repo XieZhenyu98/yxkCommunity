@@ -8,6 +8,8 @@ import com.xiezhenyu.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +23,7 @@ public class ReplyServiceImpl implements IReplyService {
 
     @Override
     public boolean add(ReplyDo replyDo) {
+        replyDo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         int num = replyMapper.insert(replyDo);
         return num>0;
     }
