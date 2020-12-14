@@ -7,9 +7,6 @@ import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.mapper.ContentMapper;
 import com.xiezhenyu.model.ContentDo;
 import com.xiezhenyu.service.IContentService;
-import com.xiezhenyu.service.IReplyService;
-import com.xiezhenyu.service.ISonModuleService;
-import com.xiezhenyu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +24,6 @@ public class ContentImpl implements IContentService {
     @Autowired
     private ContentMapper contentMapper;
 
-    @Autowired
-    private IUserService userService;
-
-    @Autowired
-    private ISonModuleService sonModuleService;
-
-    @Autowired
-    private IReplyService replyService;
-
     @Override
     public ContentDo add(ContentDo contentDo) {
         contentDo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
@@ -46,10 +34,6 @@ public class ContentImpl implements IContentService {
 
     @Override
     public ContentVo getContentById(Long id) {
-//        ContentDo contentDo = contentMapper.selectById(id);
-//        ContentVo contentVo = contentDo.toVo(sonModuleService.selectById(contentDo.getModuleId()), userService.getUserById(contentDo.getUserId()).toUserVo(), replyService.selectCountByUser(contentDo.getUserId()));
-//        Long times = contentDo.getTimes()+1;
-//        contentMapper.updateById(contentDo.setTimes(times));
         ContentVo contentVo = new ContentVo();
         contentVo.setId(id);
         ContentVo contentVod = contentMapper.selectContentById(contentVo);

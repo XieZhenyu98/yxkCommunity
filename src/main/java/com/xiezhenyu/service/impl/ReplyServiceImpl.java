@@ -2,6 +2,7 @@ package com.xiezhenyu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.ReplyVo;
 import com.xiezhenyu.mapper.ReplyMapper;
 import com.xiezhenyu.model.ReplyDo;
 import com.xiezhenyu.service.IReplyService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +48,19 @@ public class ReplyServiceImpl implements IReplyService {
     }
 
     @Override
-    public Page<ReplyDo> selectList(Integer limit, Integer offset, Long contentId) {
-        Page<ReplyDo> replyDoPage = replyMapper.selectPage(new Page<ReplyDo>(limit, offset), new QueryWrapper<ReplyDo>().eq("content_id", contentId));
-        return replyDoPage;
+    public Page<ReplyVo> selectList(Integer limit, Integer offset, Long contentId) {
+        ArrayList<ReplyVo> list = replyMapper.getReplyVoList(contentId,limit,offset);
+        Page<ReplyVo> replyVoPage = new Page<>();
+        replyVoPage.setRecords(list).setSize(offset);
+        return replyVoPage;
+    }
+
+    @Override
+    public Page<ReplyVo> selectReReplyList(Long contentId, Long fatherReplyId, Integer limit, Integer offset) {
+        ArrayList<ReplyVo> reReplyVoList = replyMapper.getReReplyVoList(contentId, fatherReplyId, limit, offset);
+        Page<ReplyVo> replyVoPage = new Page<>();
+        replyVoPage.setRecords(reReplyVoList);
+        return replyVoPage;
     }
 
     @Override

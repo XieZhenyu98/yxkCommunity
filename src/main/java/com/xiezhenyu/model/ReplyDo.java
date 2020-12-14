@@ -23,6 +23,9 @@ public class ReplyDo {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
+    @TableField("father_reply_id")
+    private Long fatherReplyId;
+
     @TableField("content_id")
     private Long contentId;
 

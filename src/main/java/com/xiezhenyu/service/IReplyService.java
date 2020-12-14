@@ -1,6 +1,7 @@
 package com.xiezhenyu.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.ReplyVo;
 import com.xiezhenyu.model.ReplyDo;
 
 import java.util.List;
@@ -45,7 +46,17 @@ public interface IReplyService {
      * @param contentId
      * @return
      */
-    public Page<ReplyDo> selectList(Integer limit, Integer offset, Long contentId);
+    public Page<ReplyVo> selectList(Integer limit, Integer offset, Long contentId);
+
+    /**
+     * 查询回复回复的内容
+     * @param contentId
+     * @param fatherReplyId
+     * @param limit
+     * @param offset
+     * @return
+     */
+    public Page<ReplyVo> selectReReplyList(Long contentId,Long fatherReplyId,Integer limit,Integer offset);
 
     /**
      * 通过引用回复的ID查找所有该回复的内容

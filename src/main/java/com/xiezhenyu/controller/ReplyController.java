@@ -2,6 +2,7 @@ package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.common.response.CommonResult;
+import com.xiezhenyu.entity.ReplyVo;
 import com.xiezhenyu.model.ReplyDo;
 import com.xiezhenyu.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,16 @@ public class ReplyController {
         return CommonResult.successCommonResult(reply,"查询成功");
     }
 
-    @GetMapping("/list/{id}")
-    public CommonResult selectList(@PathVariable("id") Long contentId){
-        Page<ReplyDo> replyPage = replyService.selectList(0, 10, contentId);
+    @GetMapping("/list/{id}/{limit}/{offset}")
+    public CommonResult selectList(@PathVariable("id") Long contentId,@PathVariable("limit") Integer limit,@PathVariable("offset") Integer offset){
+        Page<ReplyVo> replyPage = replyService.selectList(0, 10, contentId);
         return CommonResult.successCommonResult(replyPage,"查询成功");
+    }
+
+    @GetMapping("/list/re/{id}/{fatherReplyId}/{limit}/{offset}")
+    public CommonResult selectReReplyList(@PathVariable("id") Long contentId,@PathVariable("fatherReplyId") Long fatherReplyId,@PathVariable("limit") Integer limit,@PathVariable("offset") Integer offset){
+        Page<ReplyVo> replyVoPage = replyService.selectReReplyList(contentId, fatherReplyId, limit, offset);
+        return CommonResult.successCommonResult(replyVoPage,"查询成功");
     }
 
     @GetMapping("/select/quote/{id}")
