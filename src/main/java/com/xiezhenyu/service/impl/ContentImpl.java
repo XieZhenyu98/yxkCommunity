@@ -37,6 +37,8 @@ public class ContentImpl implements IContentService {
         ContentVo contentVo = new ContentVo();
         contentVo.setId(id);
         ContentVo contentVod = contentMapper.selectContentById(contentVo);
+        ContentDo contentDo = new ContentDo().setTimes(contentVo.getTimes() + 1).setId(id);
+        contentMapper.updateById(contentDo);
         return contentVod;
     }
 
