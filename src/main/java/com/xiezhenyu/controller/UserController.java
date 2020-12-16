@@ -32,7 +32,8 @@ public class UserController {
     @GetMapping("/{id}")
     public CommonResult getUserById(@PathVariable("id") Long id){
         UserDo user = userService.getUserById(id);
-        return CommonResult.successCommonResult(user,"获取成功");
+        UserVo userVo = user.toUserVo();
+        return CommonResult.successCommonResult(userVo,"获取成功");
     }
 
     @PutMapping("/update")
