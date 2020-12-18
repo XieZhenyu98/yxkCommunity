@@ -3,6 +3,7 @@ package com.xiezhenyu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.model.ContentDo;
+import io.swagger.models.auth.In;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,4 +62,14 @@ public interface IContentService {
      * @return
      */
     public ArrayList<ContentVo> selectListVo(Integer limit, Integer offset);
+
+    /**
+     * 通过用户ID查询该用户的回复
+     * @param userId
+     * @param limit
+     * @param offset
+     * @return
+     */
+    public Page<ContentDo> selectListByUserId(Long userId, Integer limit, Integer offset);
+
 }

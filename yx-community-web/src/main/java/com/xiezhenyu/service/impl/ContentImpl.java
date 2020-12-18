@@ -94,4 +94,10 @@ public class ContentImpl implements IContentService {
         return contentVos;
     }
 
+    @Override
+    public Page<ContentDo> selectListByUserId(Long userId, Integer limit, Integer offset) {
+        Page<ContentDo> page = contentMapper.selectPage(new Page<>(limit, offset), new QueryWrapper<ContentDo>().eq("user_id", userId).orderByDesc("time"));
+        return page;
+    }
+
 }

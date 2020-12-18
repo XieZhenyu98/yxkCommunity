@@ -69,4 +69,9 @@ public class ContentController {
         }
     }
 
+    @GetMapping("/select/user/{id}/{limit}/{offset}")
+    public CommonResult selectListByUserId(@PathVariable Long id,@PathVariable Integer limit,@PathVariable Integer offset){
+        Page<ContentDo> page = contentService.selectListByUserId(id, limit, offset);
+        return CommonResult.successCommonResult(page,"查询成功");
+    }
 }
