@@ -1,4 +1,0 @@
-[submodule "yx-community-web-ui"]
-    path = yx-community-web-ui
-    url = https://github.com/XieZhenyu98/yxk-community-vue.git
-    branch = master
