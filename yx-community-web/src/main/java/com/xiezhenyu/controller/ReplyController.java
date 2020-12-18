@@ -1,6 +1,7 @@
 package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.PersonalReplyVo;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.entity.ReplyVo;
 import com.xiezhenyu.model.ReplyDo;
@@ -8,6 +9,7 @@ import com.xiezhenyu.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,9 +68,16 @@ public class ReplyController {
         return CommonResult.successCommonResult(replyList,"查询成功");
     }
 
-    @GetMapping("/select/user/{id}")
-    public CommonResult selectListByUserId(@PathVariable("id") Long userId){
-        List<ReplyDo> replyList = replyService.selectListByUserId(userId);
-        return CommonResult.successCommonResult(replyList,"查询成功");
+    @GetMapping("/select/user/{id}/{limit}/{offset}")
+    public CommonResult selectListByUserId(@PathVariable("id") Long userId,@PathVariable("limit") Integer limit,@PathVariable("offset") Integer offset){
+        Page<ReplyDo> page = replyService.selectListByUserId(userId,limit,offset);
+        return CommonResult.successCommonResult(page,"查询成功");
     }
+
+    @GetMapping("/select/personal/{userId}/{limit}/{offset}")
+    public CommonResult getPersonalReplyVoByUserId(@PathVariable("userId")Long userId,@PathVariable("limit")Integer limit,@PathVariable("offset")Integer offset){
+        ArrayList<PersonalReplyVo> list = replyService.getPersonalReplyVoByUserId(userId, limit, offset);
+        return CommonResult.successCommonResult(list,"查询成功");
+    }
+
 }

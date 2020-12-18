@@ -32,6 +32,15 @@
             </association>
         </collection>
     </resultMap>
+    <resultMap id="PersonalReply" type="com.xiezhenyu.entity.PersonalReplyVo">
+        <id property="id" column="id"/>
+        <result property="time" column="time"/>
+        <result property="content" column="content"/>
+        <association property="contentDo" javaType="com.xiezhenyu.model.ContentDo">
+            <id property="id" column="c_id"/>
+            <result property="title" column="c_title"/>
+        </association>
+    </resultMap>
 
     <select id="getReplyVoList" resultMap="ReplyVoMap">
         select r.id,r.content,r.time,r.content_id,r.father_reply_id,
@@ -55,6 +64,17 @@
         left join user ru on rr.user_id = ru.id
         where r.content_id = #{param1} and r.father_reply_id = #{param2}
         limit #{param3},#{param4}
+    </select>
+    
+    <select id="getPersonalReplyVoByUserId" resultMap="PersonalReply">
+        select
+        r.id,r.time,r.content,c.id c_id,c.title c_title
+        from reply r
+        join content c
+        on r.content_id = c.id
+        where r.user_id = #{param1}
+        order by r.time desc
+        limit #{param2},#{param3}
     </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.xiezhenyu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.entity.PersonalReplyVo;
 import com.xiezhenyu.entity.ReplyVo;
 import com.xiezhenyu.mapper.ReplyMapper;
 import com.xiezhenyu.model.ReplyDo;
@@ -70,9 +71,9 @@ public class ReplyServiceImpl implements IReplyService {
     }
 
     @Override
-    public List<ReplyDo> selectListByUserId(Long userId) {
-        List<ReplyDo> replyList = replyMapper.selectList(new QueryWrapper<ReplyDo>().eq("user_id", userId));
-        return replyList;
+    public Page<ReplyDo> selectListByUserId(Long userId,Integer limit,Integer offset) {
+        Page<ReplyDo> page = replyMapper.selectPage(new Page<ReplyDo>(limit,offset),new QueryWrapper<ReplyDo>().eq("user_id", userId));
+        return page;
     }
 
     @Override
@@ -85,5 +86,11 @@ public class ReplyServiceImpl implements IReplyService {
     public Integer selectCountByUser(Long userId) {
         Integer num = replyMapper.selectCount(new QueryWrapper<ReplyDo>().eq("user_id", userId));
         return num;
+    }
+
+    @Override
+    public ArrayList<PersonalReplyVo> getPersonalReplyVoByUserId(Long user_id, Integer limit, Integer offset) {
+        ArrayList<PersonalReplyVo> list = replyMapper.getPersonalReplyVoByUserId(user_id, limit, offset);
+        return list;
     }
 }
