@@ -72,4 +72,13 @@ public interface IContentService {
      */
     public Page<ContentDo> selectListByUserId(Long userId, Integer limit, Integer offset);
 
+    /**
+     * 通过帖子Id列表查询收藏帖子列表
+     * @param limit
+     * @param offset
+     * @param userId
+     * @return
+     */
+    public List<ContentDo> selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId);
+
 }

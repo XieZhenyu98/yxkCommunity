@@ -6,12 +6,14 @@ import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.mapper.ContentMapper;
 import com.xiezhenyu.model.ContentDo;
+import com.xiezhenyu.service.ICollectionContentService;
 import com.xiezhenyu.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class ContentImpl implements IContentService {
 
     @Autowired
     private ContentMapper contentMapper;
+
+    @Autowired
+    private ICollectionContentService collectionContentService;
 
     @Override
     public ContentDo add(ContentDo contentDo) {
@@ -98,6 +103,23 @@ public class ContentImpl implements IContentService {
     public Page<ContentDo> selectListByUserId(Long userId, Integer limit, Integer offset) {
         Page<ContentDo> page = contentMapper.selectPage(new Page<>(limit, offset), new QueryWrapper<ContentDo>().eq("user_id", userId).orderByDesc("time"));
         return page;
+    }
+
+    @Override
+    public List<ContentDo> selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId) {
+        Object[] contentIds = collectionContentService.getUserCollectionContentId(userId);
+        System.out.println(Arrays.toString(contentIds));
+        String ids = "";
+        for (int i = limit; i<limit+offset; i++){
+            if(i==limit){
+                ids =contentIds[i].toString();
+            }else{
+                ids = ids + "," + contentIds[i];
+            }
+        }
+        System.out.println(ids);
+        List<ContentDo> list = contentMapper.selectList(new QueryWrapper<ContentDo>().inSql("id", ids));
+        return list;
     }
 
 }

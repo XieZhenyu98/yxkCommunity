@@ -92,4 +92,14 @@ public class ContentController {
         Page<ContentDo> page = contentService.selectListByUserId(id, limit, offset);
         return CommonResult.successCommonResult(page,"查询成功");
     }
+
+    @ApiOperation(value = "查询用户收藏的帖子", notes = "分页查询用户收藏的帖子")
+    @GetMapping("/select/collection/{limit}/{offset}/{userId}")
+    public CommonResult selectContentByCollectionContentIdList(@ApiParam(value = "第几条") @PathVariable("limit")Integer limit,
+                                                               @ApiParam(value = "偏移量") @PathVariable("offset")Integer offset,
+                                                               @ApiParam(value = "用户ID") @PathVariable("userId") Long userId){
+        List<ContentDo> contentDos = contentService.selectContentByCollectionContentIdList(limit, offset, userId);
+        return CommonResult.successCommonResult(contentDos,"查询成功");
+    }
+
 }
