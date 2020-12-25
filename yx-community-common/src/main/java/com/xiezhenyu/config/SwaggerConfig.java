@@ -48,7 +48,7 @@ public class SwaggerConfig {
                 "https://github.com/XieZhenyu98",
                 DEFAULT_CONTACT,
                 "Apache 2.0",
-                "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList());
+                "http://www.apache.org/licenses/LICENSE-2.0");
     }
 
 }
