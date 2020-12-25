@@ -49,10 +49,10 @@ public class ContentDo {
     private Long times;
 
     @TableField("topping")
-    private byte topping;
+    private Byte topping;
 
     @TableField("marvellous")
-    private byte marvellous;
+    private Byte marvellous;
 
     @TableField("adopt_reply_id")
     private Long adoptReplyId;

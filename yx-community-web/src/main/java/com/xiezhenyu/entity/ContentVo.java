@@ -26,9 +26,9 @@ public class ContentVo {
 
     private Long times;
 
-    private byte topping;
+    private Byte topping;
 
-    private byte marvellous;
+    private Byte marvellous;
 
     private Long adoptReplyId;
 
