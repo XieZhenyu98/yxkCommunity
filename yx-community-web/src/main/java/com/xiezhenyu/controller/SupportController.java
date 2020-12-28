@@ -37,12 +37,12 @@ public class SupportController {
     @ApiOperation(value = "点赞回复",notes = "点赞回复")
     @PutMapping("/reply")
     public CommonResult supportReply(@ApiParam(value = "") @RequestBody SupportReplyDo supportReplyDo){
-        return supportService.supportContent(supportReplyDo.getReplyId(), supportReplyDo.getUserId());
+        return supportService.supportReply(supportReplyDo.getReplyId(), supportReplyDo.getUserId());
     }
 
     @ApiOperation(value = "获得回复的点赞总数",notes = "通过回复的ID获取该回复的总点赞数")
     @GetMapping("/reply/count/{id}")
     public CommonResult getSupportReplyCount(@ApiParam(value = "") @PathVariable("id") Long reply_id){
-        return supportService.getSupportContentCount(reply_id);
+        return supportService.getSupportReplyCount(reply_id);
     }
 }
