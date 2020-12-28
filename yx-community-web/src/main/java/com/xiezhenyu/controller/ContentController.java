@@ -98,8 +98,7 @@ public class ContentController {
     public CommonResult selectContentByCollectionContentIdList(@ApiParam(value = "第几条") @PathVariable("limit")Integer limit,
                                                                @ApiParam(value = "偏移量") @PathVariable("offset")Integer offset,
                                                                @ApiParam(value = "用户ID") @PathVariable("userId") Long userId){
-        List<ContentDo> contentDos = contentService.selectContentByCollectionContentIdList(limit, offset, userId);
-        return CommonResult.successCommonResult(contentDos,"查询成功");
+        return  contentService.selectContentByCollectionContentIdList(limit, offset, userId);
     }
 
 }

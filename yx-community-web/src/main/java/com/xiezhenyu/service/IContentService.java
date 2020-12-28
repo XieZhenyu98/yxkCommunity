@@ -3,6 +3,7 @@ package com.xiezhenyu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.model.ContentDo;
+import com.xiezhenyu.response.CommonResult;
 import io.swagger.models.auth.In;
 
 import java.util.ArrayList;
@@ -79,6 +80,6 @@ public interface IContentService {
      * @param userId
      * @return
      */
-    public List<ContentDo> selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId);
+    public CommonResult selectContentByCollectionContentIdList(Integer limit, Integer offset, Long userId);
 
 }

@@ -6,6 +6,7 @@ import com.xiezhenyu.entity.ContentVo;
 import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.mapper.ContentMapper;
 import com.xiezhenyu.model.ContentDo;
+import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.service.ICollectionContentService;
 import com.xiezhenyu.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,20 +107,31 @@ public class ContentImpl implements IContentService {
     }
 
     @Override
-    public List<ContentDo> selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId) {
+    public CommonResult selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId) {
         Object[] contentIds = collectionContentService.getUserCollectionContentId(userId);
-        System.out.println(Arrays.toString(contentIds));
         String ids = "";
-        for (int i = limit; i<limit+offset; i++){
+        int index = limit+offset;
+        if(offset>contentIds.length){
+            offset = contentIds.length;
+        }
+        if((limit+offset) > contentIds.length){
+            index = contentIds.length;
+        }
+        for (int i = limit; i<index; i++){
             if(i==limit){
                 ids =contentIds[i].toString();
             }else{
                 ids = ids + "," + contentIds[i];
             }
         }
-        System.out.println(ids);
         List<ContentDo> list = contentMapper.selectList(new QueryWrapper<ContentDo>().inSql("id", ids));
-        return list;
+        Page<ContentDo> page = new Page<>();
+        page.setRecords(list);
+        page.setTotal(contentIds.length);
+        page.setSize(10);
+        page.setCurrent(limit/10+1);
+        CommonResult result = CommonResult.successCommonResult(page, "查询成功");
+        return result;
     }
 
 }
