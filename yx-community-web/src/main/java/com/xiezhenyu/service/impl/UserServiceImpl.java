@@ -91,8 +91,9 @@ public class UserServiceImpl implements IUserService {
         if(!redisUser.getPassword().equals(userDo.getPassword())){
             return false;
         }
-        redisUtil.hset(REDIS_DB_USER_KEY,userDo.getEmail(),userDo);
-        userMapper.updateById(userDo);
+        redisUser.setPassword(userDo.getUsername());
+        redisUtil.hset(REDIS_DB_USER_KEY,userDo.getEmail(),redisUser);
+        userMapper.updateById(redisUser);
         return true;
     }
 
