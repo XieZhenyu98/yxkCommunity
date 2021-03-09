@@ -34,7 +34,6 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
-                .groupName("以轩社区")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.xiezhenyu.controller"))
                 .build();
