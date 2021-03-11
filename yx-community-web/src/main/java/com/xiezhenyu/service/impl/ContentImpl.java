@@ -111,10 +111,7 @@ public class ContentImpl implements IContentService {
         Object[] contentIds = collectionContentService.getUserCollectionContentId(userId);
         String ids = "";
         int index = limit+offset;
-        if(offset>contentIds.length){
-            offset = contentIds.length;
-        }
-        if((limit+offset) > contentIds.length){
+        if(index > contentIds.length){
             index = contentIds.length;
         }
         for (int i = limit; i<index; i++){
