@@ -82,7 +82,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDo updateUser(UserDo userDo) {
         userMapper.updateById(userDo);
-        return userMapper.selectById(userDo.getId());
+        UserDo user = userMapper.selectById(userDo.getId());
+        login(user);
+        return user;
     }
 
     @Override
