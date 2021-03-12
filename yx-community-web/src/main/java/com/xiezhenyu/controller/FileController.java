@@ -6,6 +6,7 @@ import com.xiezhenyu.service.IUserService;
 import com.xiezhenyu.utils.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,8 +31,8 @@ public class FileController {
 
     @ApiOperation(value = "用户头像上传",notes = "用户头像上传,通过token获取用户")
     @PostMapping("/userImageUpload")
-    public CommonResult userImageUpload(@RequestParam("file") MultipartFile file,
-                                        HttpServletRequest request){
+    public CommonResult userImageUpload(@ApiParam(value = "上传的文件") @RequestParam("file") MultipartFile file,
+                                        @ApiParam(value = "请求") HttpServletRequest request){
         String token = request.getHeader("Authorization");
         String userId = JwtUtils.getTokenInfo(token).getClaim("id").asString();
         UserDo user = userService.getUserById(Long.parseLong(userId));
