@@ -3,12 +3,14 @@ package com.xiezhenyu.controller;
 import com.xiezhenyu.model.UserDo;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.service.IUserService;
+import com.xiezhenyu.utils.JwtUtils;
 import io.swagger.annotations.Api;
-import io.swagger.models.auth.In;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -26,9 +28,13 @@ public class FileController {
     private IUserService userService;
     private static String userImagePrefix = File.separator+"res"+File.separator+"images"+File.separator+"userImage"+File.separator;
 
-    @PostMapping("/userImageUpload/{userId}")
-    public CommonResult userImageUpload(@RequestParam("file") MultipartFile file,@PathVariable("userId") Long userId){
-        UserDo user = userService.getUserById(userId);
+    @ApiOperation(value = "用户头像上传",notes = "用户头像上传,通过token获取用户")
+    @PostMapping("/userImageUpload")
+    public CommonResult userImageUpload(@RequestParam("file") MultipartFile file,
+                                        HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        String userId = JwtUtils.getTokenInfo(token).getClaim("id").asString();
+        UserDo user = userService.getUserById(Long.parseLong(userId));
         String parentPath = (new File(this.getClass().getResource("/").getPath())).toString()+File.separator+"static"+File.separator+"res"+File.separator+"images"+File.separator+"userImage";
         // 判断上传文件是否为空，若为空则返回错误信息
         if(file.isEmpty()){
