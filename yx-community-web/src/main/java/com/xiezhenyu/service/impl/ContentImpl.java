@@ -109,6 +109,9 @@ public class ContentImpl implements IContentService {
     @Override
     public CommonResult selectContentByCollectionContentIdList(Integer limit,Integer offset,Long userId) {
         Object[] contentIds = collectionContentService.getUserCollectionContentId(userId);
+        if(contentIds==null){
+            return CommonResult.successCommonResult(null,"查询成功");
+        }
         String ids = "";
         int index = limit+offset;
         if(index > contentIds.length){

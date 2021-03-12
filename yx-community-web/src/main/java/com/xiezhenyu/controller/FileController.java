@@ -30,22 +30,22 @@ public class FileController {
     public CommonResult userImageUpload(@RequestParam("file") MultipartFile file,@PathVariable("userId") Long userId){
         UserDo user = userService.getUserById(userId);
         String parentPath = (new File(this.getClass().getResource("/").getPath())).toString()+File.separator+"static"+File.separator+"res"+File.separator+"images"+File.separator+"userImage";
-        //        判断上传文件是否为空，若为空则返回错误信息
+        // 判断上传文件是否为空，若为空则返回错误信息
         if(file.isEmpty()){
             return CommonResult.errorCommonResult("上传失败");
         }else{
-//         获取文件原名
+            // 获取文件原名
             String originalFilename = file.getOriginalFilename()+".png";
-//         获取源文件前缀
+            // 获取源文件前缀
             String fileNamePrefix = originalFilename.substring(0,originalFilename.lastIndexOf("."));
-            //获取源文件后缀
+            // 获取源文件后缀
             String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-//         将源文件前缀之后加上时间戳避免重名
+            // 将源文件前缀之后加上时间戳避免重名
             String newFileNamePrefix = fileNamePrefix+(new Date()).getTime();
-//         得到上传后新文件的文件名
+            // 得到上传后新文件的文件名
             String newFileName = newFileNamePrefix+fileNameSuffix;
             userService.updateUser(user.setImage(userImagePrefix+newFileName));
-//         创建一个新的File对象用于存放上传的文件
+            // 创建一个新的File对象用于存放上传的文件
             File fileNew = new File(parentPath+File.separator+newFileName);
             try {
                 file.transferTo(fileNew);
