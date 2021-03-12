@@ -53,8 +53,7 @@ public class FileController {
                 e.printStackTrace();
             }
         }
-        System.out.println(parentPath);
-        return CommonResult.successCommonResult("上传成功");
+        return CommonResult.successCommonResult(user.getImage(),"上传成功");
     }
 
 }
