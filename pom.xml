@@ -16,6 +16,7 @@
         <module>yx-community-web</module>
         <module>yx-community-common</module>
         <module>yx-community-admin</module>
+        <module>yx-community-timer</module>
     </modules>
 
     <properties>
