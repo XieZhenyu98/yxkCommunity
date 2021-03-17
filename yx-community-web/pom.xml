@@ -27,6 +27,11 @@
             <artifactId>yx-community-timer</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.xiezhenyu</groupId>
+            <artifactId>yx-community-entity</artifactId>
+            <version>1.0</version>
+        </dependency>
 
         <!--mybatis启动器-->
         <dependency>

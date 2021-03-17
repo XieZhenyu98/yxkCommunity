@@ -17,6 +17,7 @@
         <module>yx-community-common</module>
         <module>yx-community-admin</module>
         <module>yx-community-timer</module>
+        <module>yx-community-entity</module>
     </modules>
 
     <properties>

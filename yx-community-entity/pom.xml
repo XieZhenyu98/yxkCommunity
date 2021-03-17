@@ -9,17 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yx-community-timer</artifactId>
+    <artifactId>yx-community-entity</artifactId>
     <dependencies>
+        <!--lombok-->
         <dependency>
-            <groupId>com.xiezhenyu</groupId>
-            <artifactId>yx-community-entity</artifactId>
-            <version>1.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
+        <!--mybatis-plus启动器-->
         <dependency>
-            <groupId>com.xiezhenyu</groupId>
-            <artifactId>yx-community-common</artifactId>
-            <version>1.0</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
