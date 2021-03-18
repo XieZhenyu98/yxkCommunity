@@ -27,6 +27,7 @@
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <jwt.version>3.4.0</jwt.version>
         <swagger.version>2.6.1</swagger.version>
+        <quartz.version>2.3.0</quartz.version>
     </properties>
 
     <dependencies>
@@ -80,6 +81,12 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <!-- Quartz -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
