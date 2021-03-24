@@ -1,5 +1,6 @@
 package com.xiezhenyu;
 
+import com.xiezhenyu.listener.MyApplicationListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class YxkBbsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(YxkBbsApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(YxkBbsApplication.class);
+        springApplication.addListeners(new MyApplicationListener());
+        springApplication.run(args);
     }
 
 }
