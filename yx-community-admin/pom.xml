@@ -17,6 +17,11 @@
             <artifactId>yx-community-web</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.xiezhenyu</groupId>
+            <artifactId>yx-community-timer</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
