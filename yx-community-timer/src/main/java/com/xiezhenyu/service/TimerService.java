@@ -24,4 +24,33 @@ public interface TimerService {
      */
     CommonResult startTimer(Integer id);
 
+    /**
+     * 获取定时任务列表
+     * @param limit 第几页
+     * @param offset 偏移量
+     * @return
+     */
+    CommonResult getTimerPages(Integer limit,Integer offset);
+
+    /**
+     * 删除一个定时任务
+     * @param quartzJob
+     * @return
+     */
+    CommonResult deleteTimer(QuartzJob quartzJob);
+
+    /**
+     * 暂停一个定时任务
+     * @param quartzJob
+     * @return
+     */
+    CommonResult pauseTimer(QuartzJob quartzJob);
+
+    /**
+     * 恢复一个定时任务
+     * @param quartzJob
+     * @return
+     */
+    CommonResult resumeTimer(QuartzJob quartzJob);
+
 }
