@@ -133,7 +133,7 @@ public class QuartzJob {
     private Integer type;
 
     /**
-     * 任务的状态，0代表停止状态；1代表运行状态。
+     * 任务的状态，0代表停止状态；1代表暂停状态；2代表运行状态。
      */
     @TableField("job_status")
     private Integer jobStatus;
