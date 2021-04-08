@@ -1,4 +1,7 @@
 # 1、描述
+
+本项目详细开发过程情况请查看项目[点击这跳转到wiki](https://github.com/xiezhenyu98/yxkCommunity/wiki)
+
 > 启动类有两个
 >
 > `yx-community-admin`中的启动类为后台管理员模块的启动类，可以部署在后台并通过修改端口防止，使其只能在内网访问。
