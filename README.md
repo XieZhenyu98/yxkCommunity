@@ -2,6 +2,36 @@
 
 本项目详细开发过程情况请查看项目[点击这跳转到wiki](https://github.com/xiezhenyu98/yxkCommunity/wiki)
 
+## 1.1、项目技术栈
+
+编程语言：Java 1.8
+
+web框架：Spring Boot 2.3.4
+
+前端框架：Vue 3.0
+
+数据库：Mysql 5.7
+
+数据源：Druid 1.1.12
+
+K/V库：Redis 6.2.0
+
+大数据存储：Elasticsearch 7.7
+
+ORM组件：Mybatis 2.1.3
+
+定时任务工具：Quartz 2.3.0
+
+数据库工具：Flyway 6.4.4
+
+api文档工具：Swagger 2.6.1
+
+容器部署：Docker 19.03.5
+
+开发IDE: Idea 2020.1.3
+
+## 1.2、相关说明
+
 > 启动类有两个
 >
 > `yx-community-admin`中的启动类为后台管理员模块的启动类，可以部署在后台并通过修改端口防止，使其只能在内网访问。
