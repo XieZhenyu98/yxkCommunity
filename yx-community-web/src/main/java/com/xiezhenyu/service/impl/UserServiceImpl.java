@@ -36,7 +36,7 @@ public class UserServiceImpl implements IUserService {
     public CommonResult login(UserDo userDo) {
         UserDo userDB = userMapper.selectOne(new QueryWrapper<UserDo>().eq("email", userDo.getEmail()));
         if(userDB==null||!userDB.getPassword().equals(userDo.getPassword())){
-            CommonResult.errorCommonResult("用户名或者密码错误！");
+            return CommonResult.errorCommonResult("用户名或者密码错误！");
         }
         ArrayList<Object> list = new ArrayList<>();
         String token = null;
