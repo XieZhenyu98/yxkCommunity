@@ -43,8 +43,9 @@ public class TimerController {
     }
 
     @ApiOperation(value = "停止定时任务", notes = "停止定时任务")
+    @PutMapping("/stop/{id}")
     public CommonResult stopTimer(@ApiParam(value = "定时任务id") @PathVariable Integer id){
-        return null;
+        return timerService.stopTimer(id);
     }
 
     @ApiOperation(value = "删除定时任务", notes = "删除定时任务")
