@@ -51,6 +51,20 @@ public class TimerServiceImpl implements TimerService {
     }
 
     @Override
+    public CommonResult stopTimer(Integer id){
+        QuartzJob quartzJob = quartzJobService.selectQuartzJob(id);
+        try {
+            quartzManage.deleteJob(quartzJob);
+            quartzJob.setJobStatus(QuartzJob.STATUS_STOP);
+            quartzJobService.updateJob(quartzJob);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            return CommonResult.errorCommonResult(e.getMessage(),"任务停止失败");
+        }
+        return CommonResult.successCommonResult("任务停止成功");
+    }
+
+    @Override
     public CommonResult deleteTimer(QuartzJob quartzJob) {
         try {
             QuartzJob job = quartzJobService.selectQuartzJob(quartzJob.getId());

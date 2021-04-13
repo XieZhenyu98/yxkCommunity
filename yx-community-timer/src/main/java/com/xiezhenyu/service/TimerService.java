@@ -33,6 +33,13 @@ public interface TimerService {
     CommonResult getTimerPages(Integer limit,Integer offset);
 
     /**
+     * 停止定时任务
+     * @param id 定时任务id
+     * @return
+     */
+    CommonResult stopTimer(Integer id);
+
+    /**
      * 删除一个定时任务
      * @param quartzJob
      * @return

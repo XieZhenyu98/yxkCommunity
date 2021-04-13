@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,6 +40,11 @@ public class TimerController {
     public CommonResult getTimerPages(@ApiParam(value = "第几页") @PathVariable Integer limit,
                                       @ApiParam(value = "偏移量") @PathVariable Integer offset){
         return timerService.getTimerPages(limit,offset);
+    }
+
+    @ApiOperation(value = "停止定时任务", notes = "停止定时任务")
+    public CommonResult stopTimer(@ApiParam(value = "定时任务id") @PathVariable Integer id){
+        return null;
     }
 
     @ApiOperation(value = "删除定时任务", notes = "删除定时任务")
