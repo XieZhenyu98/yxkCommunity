@@ -134,4 +134,10 @@ public class ContentImpl implements IContentService {
         return result;
     }
 
+    @Override
+    public List<ContentDo> getAllContent() {
+        List<ContentDo> contentDos = contentMapper.selectList(new QueryWrapper<ContentDo>());
+        return contentDos;
+    }
+
 }

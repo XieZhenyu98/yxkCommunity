@@ -82,4 +82,10 @@ public interface IContentService {
      */
     public CommonResult selectContentByCollectionContentIdList(Integer limit, Integer offset, Long userId);
 
+    /**
+     * 获取所有的帖子
+     * @return
+     */
+    public List<ContentDo> getAllContent();
+
 }
