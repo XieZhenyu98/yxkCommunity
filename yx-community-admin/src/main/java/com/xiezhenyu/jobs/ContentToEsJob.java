@@ -1,6 +1,6 @@
 package com.xiezhenyu.jobs;
 
-import com.xiezhenyu.service.ContentToEsService;
+import com.xiezhenyu.service.ContentEsService;
 import com.xiezhenyu.utils.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
@@ -17,7 +17,7 @@ public class ContentToEsJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         log.info("开始执行帖子es同步...");
-        ContentToEsService bean = SpringUtil.getBean(ContentToEsService.class);
+        ContentEsService bean = SpringUtil.getBean(ContentEsService.class);
         bean.contentToEs();
         log.info("帖子es同步执行成功...");
     }
