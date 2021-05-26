@@ -8,59 +8,45 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Date;
 
 /**
  * @author Tim
- * @date 2021/4/13
+ * @date 2021/5/26
  */
-@Getter
-@Setter
-@AllArgsConstructor
+@TableName("yxk_role")
+@Data
 @NoArgsConstructor
-@TableName("user_manage")
-public class UserManage {
+@AllArgsConstructor
+public class Role {
 
-    /**
-     * 管理员id
-     */
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 管理员用户名
-     */
     @TableField("name")
     private String name;
 
-    /**
-     * 管理员密码
-     */
-    @TableField("password")
-    private String password;
+    @TableField("description")
+    private String description;
 
-    /**
-     * 帐号创建时间
-     */
+    @TableField("user_count")
+    private Integer userCount;
+
+    @TableField("ctime")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField("create_time")
-    private Date createTime;
+    private Date ctime;
 
-    /**
-     * 最后登录时间
-     */
+    @TableField("utime")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField("last_login_time")
-    private Date lastLoginTime;
+    private Date utime;
 
-    /**
-     * 管理员权限等级
-     */
-    @TableField("role_id")
-    private Long roleId;
+    @TableField("sort")
+    private Integer sort;
+
+    @TableField("status")
+    private Integer status;
 }

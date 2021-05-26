@@ -1,0 +1,1 @@
+ALTER TABLE yxk_menu ADD COLUMN url varchar(20) DEFAULT NULL COMMENT '地址';

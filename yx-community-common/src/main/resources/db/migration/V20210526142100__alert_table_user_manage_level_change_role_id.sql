@@ -1,0 +1,1 @@
+ALTER TABLE user_manage CHANGE `level` role_id bigint(20) NOT NULL COMMENT '权限id';
