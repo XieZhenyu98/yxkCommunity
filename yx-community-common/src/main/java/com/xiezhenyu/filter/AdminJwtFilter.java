@@ -22,7 +22,6 @@ public class AdminJwtFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         String token = request.getHeader("Authorization");
-        System.out.println(request.getServletPath());
         if(!request.getServletPath().equals("/admin/login")&&!verify(token)) {
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Cache-Control", "no-cache");
