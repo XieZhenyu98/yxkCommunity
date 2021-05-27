@@ -14,7 +14,6 @@ public class SimpleCORSFilter implements Filter {
     private static final String OPTIONS = "OPTIONS";
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("SimpleCORSFilter");
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
