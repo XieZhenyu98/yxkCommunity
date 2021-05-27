@@ -56,6 +56,16 @@ public class JwtUtils {
     }
 
     /**
+     * 获取token信息
+     * @param token
+     * @param key key值
+     * @return
+     */
+    public static String getTokenInfo(String token, String key) {
+        return JwtUtils.getTokenInfo(token).getClaim(key).asString();
+    }
+
+    /**
      * 验证token是否合法
      * @param token
      * @return

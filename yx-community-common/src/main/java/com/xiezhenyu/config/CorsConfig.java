@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 /**
  * @author Tim
  */
-@Configuration
 public class CorsConfig extends WebMvcConfigurationSupport {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
