@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,5 +58,35 @@ public class MenuServiceImpl implements MenuService {
             menu.setNextMenus(nextMenus);
         }
         return menus;
+    }
+
+    @Override
+    public List<Menu> getByParentId(Long parentId) {
+        List<Menu> list = menuMapper.selectList(new QueryWrapper<Menu>().eq("parent_id", parentId));
+        return list;
+    }
+
+    @Override
+    public void addMenu(Menu menu) {
+        menu.setCtime(new Date());
+        menu.setUtime(new Date());
+        menuMapper.insert(menu);
+    }
+
+    @Override
+    public void updateMenu(Menu menu) {
+        menu.setUtime(new Date());
+        menuMapper.updateById(menu);
+    }
+
+    @Override
+    public boolean deleteMenu(Menu menu) {
+        List<Menu> nextMenus = getByParentId(menu.getId());
+        if(nextMenus ==null || nextMenus.size()==0){
+            menuMapper.deleteById(menu.getId());
+            return true;
+        }else {
+            return false;
+        }
     }
 }

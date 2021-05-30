@@ -57,6 +57,9 @@ public class Menu {
     @TableField("notes")
     private String notes;
 
+    @TableField("url")
+    private String url;
+
     @TableField(exist = false)
     private List<Menu> nextMenus;
 

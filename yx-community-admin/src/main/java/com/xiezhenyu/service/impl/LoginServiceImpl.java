@@ -9,10 +9,7 @@ import com.xiezhenyu.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Tim
@@ -41,5 +38,11 @@ public class LoginServiceImpl implements LoginService {
         resMap.put("token",token);
         resMap.put("userManage",userManageDB);
         return CommonResult.successCommonResult(resMap,"登录成功");
+    }
+
+    @Override
+    public List<UserManage> getRoleId(Long roleId) {
+        List<UserManage> list = loginMapper.selectList(new QueryWrapper<UserManage>().eq("role_id", roleId));
+        return list;
     }
 }
