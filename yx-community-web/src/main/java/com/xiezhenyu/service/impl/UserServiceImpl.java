@@ -131,4 +131,10 @@ public class UserServiceImpl implements IUserService {
         return true;
     }
 
+    @Override
+    public List<UserDo> getByKeywords(String keywords) {
+        List<UserDo> userList = userMapper.selectList(new QueryWrapper<UserDo>().like("email", keywords));
+        return userList;
+    }
+
 }

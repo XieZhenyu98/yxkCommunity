@@ -3,6 +3,9 @@ package com.xiezhenyu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.FatherModuleVo;
 import com.xiezhenyu.model.FatherModuleDo;
+import com.xiezhenyu.query.FatherModuleQuery;
+
+import java.util.List;
 
 /**
  * @author Tim
@@ -44,5 +47,25 @@ public interface IFatherModuleService {
      * @return
      */
     public FatherModuleDo selectById(Long id);
+
+    /**
+     * 父板块分页
+     * @param fatherModuleQuery
+     * @return
+     */
+    Page<FatherModuleDo> getPage(FatherModuleQuery fatherModuleQuery);
+
+    /**
+     * 删除父板块
+     * @param fatherModuleDo
+     * @return
+     */
+    boolean deleteModule(FatherModuleDo fatherModuleDo);
+
+    /**
+     * 获取所有父板块
+     * @return
+     */
+    List<FatherModuleDo> getAll();
 
 }

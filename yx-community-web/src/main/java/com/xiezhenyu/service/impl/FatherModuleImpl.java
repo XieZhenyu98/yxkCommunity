@@ -1,9 +1,12 @@
 package com.xiezhenyu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.FatherModuleVo;
+import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.mapper.FatherModuleMapper;
 import com.xiezhenyu.model.FatherModuleDo;
+import com.xiezhenyu.query.FatherModuleQuery;
 import com.xiezhenyu.service.IFatherModuleService;
 import com.xiezhenyu.service.ISonModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +56,30 @@ public class FatherModuleImpl implements IFatherModuleService {
     @Override
     public FatherModuleDo selectById(Long id) {
         return fatherModuleMapper.selectById(id);
+    }
+
+    @Override
+    public Page<FatherModuleDo> getPage(FatherModuleQuery fatherModuleQuery) {
+        Page<FatherModuleDo> fatherModules = fatherModuleMapper.selectPage(new Page<>(fatherModuleQuery.getPageNo(), fatherModuleQuery.getPageSize()),
+                new QueryWrapper<FatherModuleDo>().like("module_name", fatherModuleQuery.getModuleName()).orderByDesc("sort"));
+        return fatherModules;
+    }
+
+    @Override
+    public boolean deleteModule(FatherModuleDo fatherModuleDo) {
+        ArrayList<SonModuleVo> sonList = sonModuleService.selectListByFatherId(fatherModuleDo.getId());
+        if(sonList==null || sonList.size()==0) {
+            fatherModuleMapper.deleteById(fatherModuleDo.getId());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<FatherModuleDo> getAll() {
+        List<FatherModuleDo> fatherModuleDos = fatherModuleMapper.selectList(null);
+        return fatherModuleDos;
     }
 
 }

@@ -39,4 +39,11 @@ public class SonModuleDo {
     @TableField("father_module_id")
     private Long fatherModuleId;
 
+    @TableField(exist = false)
+    private UserDo userDo;
+
+    @TableField(exist = false)
+    private FatherModuleDo fatherModuleDo;
+
+
 }

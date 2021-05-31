@@ -1,6 +1,9 @@
 package com.xiezhenyu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.SonModuleVo;
+import com.xiezhenyu.model.SonModuleDo;
+import com.xiezhenyu.query.SonModuleQuery;
 
 import java.util.ArrayList;
 
@@ -12,10 +15,10 @@ public interface ISonModuleService {
 
     /**
      * 添加子版块
-     * @param sonModuleVo
+     * @param sonModuleDo
      * @return
      */
-    public boolean insert(SonModuleVo sonModuleVo);
+    public boolean insert(SonModuleDo sonModuleDo);
 
     /**
      * 查询所有子版块
@@ -27,10 +30,10 @@ public interface ISonModuleService {
 
     /**
      * 修改子版块信息
-     * @param sonModuleVo
+     * @param sonModuleDo
      * @return
      */
-    public boolean update(SonModuleVo sonModuleVo);
+    public boolean update(SonModuleDo sonModuleDo);
 
     /**
      * 通过ID查询子版块信息
@@ -53,4 +56,17 @@ public interface ISonModuleService {
      */
     public ArrayList<SonModuleVo> selectListByFatherId(Long id);
 
+    /**
+     * 子版块分页
+     * @param sonModuleQuery
+     * @return
+     */
+    Page<SonModuleDo> getPage(SonModuleQuery sonModuleQuery);
+
+    /**
+     * 删除子版块
+     * @param sonModuleDo
+     * @return
+     */
+    boolean deleteSonModule(SonModuleDo sonModuleDo);
 }

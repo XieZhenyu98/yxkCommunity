@@ -88,4 +88,11 @@ public interface IUserService {
      * @return
      */
     boolean resetPassword(UserDo userDo);
+
+    /**
+     * 通过关键字获取用户列表
+     * @param keywords
+     * @return
+     */
+    List<UserDo> getByKeywords(String keywords);
 }

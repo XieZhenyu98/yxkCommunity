@@ -1,5 +1,8 @@
 package com.xiezhenyu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.model.SonModuleDo;
+import com.xiezhenyu.query.SonModuleQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.entity.SonModuleVo;
 import com.xiezhenyu.service.ISonModuleService;
@@ -24,8 +27,8 @@ public class SonModuleController {
 
     @ApiOperation(value = "添加子模块",notes = "添加子模块")
     @PostMapping("/add")
-    public CommonResult add(@ApiParam(value = "子模块实体类") @RequestBody SonModuleVo sonModuleVo){
-        boolean result = sonModuleService.insert(sonModuleVo);
+    public CommonResult add(@ApiParam(value = "子模块实体类") @RequestBody SonModuleDo sonModuleDo){
+        boolean result = sonModuleService.insert(sonModuleDo);
         if(result){
             return CommonResult.successCommonResult("添加成功");
         }else {
@@ -43,8 +46,8 @@ public class SonModuleController {
 
     @ApiOperation(value = "修改子模块",notes = "修改子模块")
     @PutMapping("/update")
-    public CommonResult update(@ApiParam(value = "子模块实体类") @RequestBody SonModuleVo sonModuleVo){
-        boolean result = sonModuleService.update(sonModuleVo);
+    public CommonResult update(@ApiParam(value = "子模块实体类") @RequestBody SonModuleDo sonModuleDo){
+        boolean result = sonModuleService.update(sonModuleDo);
         if(result){
             return CommonResult.successCommonResult("修改成功");
         }else{
@@ -68,5 +71,19 @@ public class SonModuleController {
         }else {
             return CommonResult.errorCommonResult("删除失败");
         }
+    }
+
+    @ApiOperation("子版块分页")
+    @PostMapping("/page")
+    public CommonResult getPage(@ApiParam("子版块查询实体类") @RequestBody SonModuleQuery sonModuleQuery) {
+        Page<SonModuleDo> page = sonModuleService.getPage(sonModuleQuery);
+        return CommonResult.successCommonResult(page,"查询成功");
+    }
+
+    @ApiOperation("子版块删除")
+    @PostMapping("/delete")
+    public CommonResult deleteSonModule(@ApiParam("子版块实体类") @RequestBody SonModuleDo sonModuleDo) {
+        sonModuleService.deleteSonModule(sonModuleDo);
+        return CommonResult.successCommonResult("删除成功");
     }
 }

@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Tim
  */
@@ -95,5 +97,12 @@ public class UserController {
     public CommonResult resetPassword(@ApiParam("用户实体类") @RequestBody UserDo userDo) {
         userService.resetPassword(userDo);
         return CommonResult.successCommonResult("重置成功");
+    }
+
+    @ApiOperation("通过关键字查找用户")
+    @GetMapping("/allByKeyword")
+    public CommonResult getByKeywords(@ApiParam("关键字") String keywords) {
+        List<UserDo> list = userService.getByKeywords(keywords);
+        return CommonResult.successCommonResult(list,"查询成功");
     }
 }

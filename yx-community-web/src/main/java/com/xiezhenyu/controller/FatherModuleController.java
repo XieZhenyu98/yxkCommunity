@@ -1,6 +1,7 @@
 package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.query.FatherModuleQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.entity.FatherModuleVo;
 import com.xiezhenyu.model.FatherModuleDo;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Tim
@@ -60,6 +63,31 @@ public class FatherModuleController {
     public CommonResult selectById(@ApiParam(value = "") @PathVariable("id")Long id){
         FatherModuleDo fatherModule = fatherModuleService.selectById(id);
         return CommonResult.successCommonResult(fatherModule,"查询成功");
+    }
+
+    @ApiOperation("父板块列表分页")
+    @PostMapping("/page")
+    public CommonResult getPage(@ApiParam("查询实体类") @RequestBody FatherModuleQuery fatherModuleQuery) {
+        Page<FatherModuleDo> page = fatherModuleService.getPage(fatherModuleQuery);
+        return CommonResult.successCommonResult(page,"查询成功");
+    }
+
+    @ApiOperation("父板块删除")
+    @PostMapping("/delete")
+    public CommonResult deleteModule(@ApiParam("父板块实体类") @RequestBody FatherModuleDo fatherModuleDo) {
+        boolean res = fatherModuleService.deleteModule(fatherModuleDo);
+        if(res) {
+            return CommonResult.successCommonResult("删除成功");
+        }else {
+            return CommonResult.errorCommonResult("删除失败，请先将改父板块下的子版块删除！");
+        }
+    }
+
+    @ApiOperation("获取所有父板块")
+    @GetMapping("/all")
+    public CommonResult getAll() {
+        List<FatherModuleDo> list = fatherModuleService.getAll();
+        return CommonResult.successCommonResult(list,"查询成功");
     }
 
 }
