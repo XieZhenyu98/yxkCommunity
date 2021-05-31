@@ -55,6 +55,8 @@ public class UserDo {
     private Long experience;
     @TableField("level")
     private Integer level;
+    @TableField("is_delete")
+    private Integer isDelete;
     public UserVo toUserVo(){
         return new UserVo().setId(this.getId())
             .setEmail(this.getEmail())
@@ -69,6 +71,7 @@ public class UserDo {
             .setJoiningTime(this.getJoiningTime())
             .setLastTime(this.getLastTime())
             .setExperience(this.experience)
-            .setLevel(this.level);
+            .setLevel(this.level)
+            .setIsDelete(this.isDelete);
     }
 }

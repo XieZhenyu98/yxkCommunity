@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author Tim
  * @date 2021/5/27
@@ -61,5 +63,12 @@ public class RoleController {
         }else{
             return CommonResult.errorCommonResult("删除失败，请先删除或修改该权限下的用户！");
         }
+    }
+
+    @ApiOperation("获取所有权限")
+    @GetMapping("/all")
+    public CommonResult roleAll(){
+        List<Role> roles = roleService.roleAll();
+        return CommonResult.successCommonResult(roles,"查询成功");
     }
 }

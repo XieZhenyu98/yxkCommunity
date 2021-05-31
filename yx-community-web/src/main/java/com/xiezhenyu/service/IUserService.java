@@ -3,6 +3,7 @@ package com.xiezhenyu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.model.UserDo;
+import com.xiezhenyu.query.UserQuery;
 import com.xiezhenyu.response.CommonResult;
 
 import java.util.List;
@@ -59,4 +60,32 @@ public interface IUserService {
      * @return
      */
     public Page<UserVo> userListByEx();
+
+    /**
+     * 获取用户列表
+     * @param userQuery
+     * @return
+     */
+    public Page<UserDo> userList(UserQuery userQuery);
+
+    /**
+     * 删除用户
+     * @param userDo
+     * @return
+     */
+    public boolean deleteUser(UserDo userDo);
+
+    /**
+     * 恢复用户
+     * @param userDo
+     * @return
+     */
+    public boolean recoveryUser(UserDo userDo);
+
+    /**
+     * 重置密码
+     * @param userDo
+     * @return
+     */
+    boolean resetPassword(UserDo userDo);
 }

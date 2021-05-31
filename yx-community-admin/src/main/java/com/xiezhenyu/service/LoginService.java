@@ -1,6 +1,8 @@
 package com.xiezhenyu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.model.admin.UserManage;
+import com.xiezhenyu.query.UserManageQuery;
 import com.xiezhenyu.response.CommonResult;
 
 import java.util.List;
@@ -25,4 +27,31 @@ public interface LoginService {
      */
     List<UserManage> getRoleId(Long roleId);
 
+    /**
+     * 获取管理员分页
+     * @param userManageQuery
+     * @return
+     */
+    Page<UserManage> getPage(UserManageQuery userManageQuery);
+
+    /**
+     * 添加管理员
+     * @param userManage
+     * @return
+     */
+    boolean addUserManage(UserManage userManage);
+
+    /**
+     * 修改管理员
+     * @param userManage
+     * @return
+     */
+    boolean updateUserManage(UserManage userManage);
+
+    /**
+     * 删除管理员
+     * @param userManage
+     * @return
+     */
+    boolean deleteUserManage(UserManage userManage);
 }

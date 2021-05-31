@@ -2,10 +2,13 @@ package com.xiezhenyu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.construct.CommonConfig;
+import com.xiezhenyu.query.UserQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.mapper.UserMapper;
 import com.xiezhenyu.model.UserDo;
+import com.xiezhenyu.service.ICommonConfigService;
 import com.xiezhenyu.service.IUserService;
 import com.xiezhenyu.utils.JwtUtils;
 import com.xiezhenyu.utils.RedisUtil;
@@ -23,6 +26,8 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ICommonConfigService commonConfigService;
 
     @Override
     public boolean register(UserDo userDo) {
@@ -93,4 +98,37 @@ public class UserServiceImpl implements IUserService {
         pageVo.setRecords(list).setSize(experience.getSize()).setCurrent(experience.getCurrent()).setTotal(experience.getTotal());
         return pageVo;
     }
+
+    @Override
+    public Page<UserDo> userList(UserQuery userQuery) {
+        Page page = null;
+        if(userQuery.getIsDelete()!=null){
+            page = userMapper.selectPage(new Page(userQuery.getPageNo(), userQuery.getPageSize()), new QueryWrapper<UserDo>().like("username", userQuery.getUsername()).like("email", userQuery.getEmail()).eq("is_delete",userQuery.getIsDelete()));
+        }else{
+            page = userMapper.selectPage(new Page(userQuery.getPageNo(), userQuery.getPageSize()), new QueryWrapper<UserDo>().like("username", userQuery.getUsername()).like("email", userQuery.getEmail()));
+        }
+        return page;
+    }
+
+    @Override
+    public boolean deleteUser(UserDo userDo) {
+        userDo.setIsDelete(1);
+        userMapper.updateById(userDo);
+        return true;
+    }
+
+    @Override
+    public boolean recoveryUser(UserDo userDo) {
+        userDo.setIsDelete(0);
+        userMapper.updateById(userDo);
+        return true;
+    }
+
+    @Override
+    public boolean resetPassword(UserDo userDo) {
+        userDo.setPassword(commonConfigService.getByPrefixAndKey(CommonConfig.USER_PREFIX,CommonConfig.USER_DEFAULT_PASSWORD_KEY).getConfigValue());
+        userMapper.updateById(userDo);
+        return true;
+    }
+
 }

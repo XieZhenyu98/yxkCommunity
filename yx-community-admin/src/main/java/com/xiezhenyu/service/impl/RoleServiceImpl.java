@@ -60,4 +60,10 @@ public class RoleServiceImpl implements RoleService {
             return true;
         }
     }
+
+    @Override
+    public List<Role> roleAll() {
+        List<Role> roles = roleMapper.selectList(null);
+        return roles;
+    }
 }

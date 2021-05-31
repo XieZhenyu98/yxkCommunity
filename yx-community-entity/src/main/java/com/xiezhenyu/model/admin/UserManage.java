@@ -63,4 +63,7 @@ public class UserManage {
      */
     @TableField("role_id")
     private Long roleId;
+
+    @TableField(exist = false)
+    private Role role;
 }

@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN is_delete int(10) NOT NULL DEFAULT 0 COMMENT '是否删除';

@@ -3,6 +3,8 @@ package com.xiezhenyu.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.model.admin.Role;
 
+import java.util.List;
+
 /**
  * @author Tim
  */
@@ -41,4 +43,10 @@ public interface RoleService {
      * @return
      */
     boolean deleteRole(Role role);
+
+    /**
+     * 获取所有权限列表
+     * @return
+     */
+    List<Role> roleAll();
 }

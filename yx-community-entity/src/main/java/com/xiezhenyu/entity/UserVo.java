@@ -44,4 +44,6 @@ public class UserVo {
     private Long experience;
 
     private Integer level;
+
+    private Integer isDelete;
 }

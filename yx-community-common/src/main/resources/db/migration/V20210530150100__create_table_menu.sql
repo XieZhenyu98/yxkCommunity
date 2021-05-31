@@ -42,6 +42,8 @@ CREATE TABLE `yxk_role_menu_relation`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` bigint(20) NOT NULL COMMENT '权限id',
   `menu_id` bigint(20) NOT NULL COMMENT '菜单id',
+  `ctime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '菜单创建时间',
+  `utime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '菜单修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限对应能能访问的菜单表' ROW_FORMAT = Dynamic;
 SET FOREIGN_KEY_CHECKS = 1;

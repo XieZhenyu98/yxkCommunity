@@ -1,6 +1,7 @@
 package com.xiezhenyu.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xiezhenyu.query.UserQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.entity.UserVo;
 import com.xiezhenyu.model.UserDo;
@@ -66,5 +67,33 @@ public class UserController {
     public CommonResult userListByEx(){
         Page<UserVo> userVoPage = userService.userListByEx();
         return CommonResult.successCommonResult(userVoPage,"查询成功");
+    }
+
+    @ApiOperation("查询用户列表")
+    @PostMapping("/userList")
+    public CommonResult userList(@ApiParam("用户实体类") @RequestBody UserQuery userQuery) {
+        Page<UserDo> userDoPage = userService.userList(userQuery);
+        return CommonResult.successCommonResult(userDoPage,"查询成功");
+    }
+
+    @ApiOperation("删除用户")
+    @PostMapping("/delete")
+    public CommonResult deleteUser(@ApiParam("用户实体类") @RequestBody UserDo userDo){
+        userService.deleteUser(userDo);
+        return CommonResult.successCommonResult("删除成功");
+    }
+
+    @ApiOperation("删除用户")
+    @PostMapping("/recovery")
+    public CommonResult recoveryUser(@ApiParam("用户实体类") @RequestBody UserDo userDo){
+        userService.recoveryUser(userDo);
+        return CommonResult.successCommonResult("恢复成功");
+    }
+
+    @ApiOperation("重置密码")
+    @PostMapping("/resetPassword")
+    public CommonResult resetPassword(@ApiParam("用户实体类") @RequestBody UserDo userDo) {
+        userService.resetPassword(userDo);
+        return CommonResult.successCommonResult("重置成功");
     }
 }

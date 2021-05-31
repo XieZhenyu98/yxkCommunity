@@ -48,4 +48,17 @@ public interface MenuService {
      */
     boolean deleteMenu(Menu menu);
 
+    /**
+     * 通过id获取菜单
+     * @param id
+     * @return
+     */
+    Menu getById(Long id);
+
+    /**
+     * 获取所有菜单
+     * @return
+     */
+    List<Menu> getAll();
+
 }

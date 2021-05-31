@@ -89,4 +89,16 @@ public class MenuServiceImpl implements MenuService {
             return false;
         }
     }
+
+    @Override
+    public Menu getById(Long id) {
+        Menu menu = menuMapper.selectById(id);
+        return menu;
+    }
+
+    @Override
+    public List<Menu> getAll() {
+        List<Menu> menus = menuMapper.selectList(null);
+        return menus;
+    }
 }

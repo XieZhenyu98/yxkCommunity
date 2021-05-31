@@ -7,37 +7,27 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 /**
  * @author Tim
- * @date 2021/5/26
+ * @date 2021/5/30
  */
 @Data
-@TableName("yxk_role_menu_relation")
-@AllArgsConstructor
-@NoArgsConstructor
-public class RoleMenuRelation {
+@TableName("yxk_icon")
+public class Icon {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
-    @TableField("role_id")
-    private Long roleId;
+    @TableField("icon_code")
+    private String iconCode;
 
-    @TableField(exist = false)
-    private Role role;
-
-    @TableField("menu_id")
-    private Long menuId;
-
-    @TableField(exist = false)
-    private Menu menu;
+    @TableField("icon_description")
+    private String iconDescription;
 
     @TableField("ctime")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")

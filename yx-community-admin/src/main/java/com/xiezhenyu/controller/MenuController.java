@@ -72,4 +72,11 @@ public class MenuController {
             return CommonResult.errorCommonResult("删除失败，请先删除子菜单。");
         }
     }
+
+    @ApiOperation("获取所有菜单，无层级")
+    @GetMapping("/allNo")
+    public CommonResult getAll() {
+        List<Menu> all = menuService.getAll();
+        return CommonResult.successCommonResult(all,"查询成功");
+    }
 }

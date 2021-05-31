@@ -1,4 +1,4 @@
-package com.xiezhenyu.model.admin;
+package com.xiezhenyu.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -7,44 +7,39 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 /**
  * @author Tim
- * @date 2021/5/26
+ * @date 2021/5/30
  */
 @Data
-@TableName("yxk_role_menu_relation")
-@AllArgsConstructor
-@NoArgsConstructor
-public class RoleMenuRelation {
+@TableName("yxk_common_config")
+public class CommonConfigDo {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
-    @TableField("role_id")
-    private Long roleId;
+    @TableField("prefix")
+    private String prefix;
 
-    @TableField(exist = false)
-    private Role role;
+    @TableField("config_key")
+    private String configKey;
 
-    @TableField("menu_id")
-    private Long menuId;
+    @TableField("config_value")
+    private String configValue;
 
-    @TableField(exist = false)
-    private Menu menu;
+    @TableField("description")
+    private String description;
 
-    @TableField("ctime")
+    @TableField("gmt_create")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date ctime;
+    private Date gmtCreate;
 
-    @TableField("utime")
+    @TableField("gmt_modify")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date utime;
-
+    private Date gmtModify;
 }
