@@ -1,6 +1,8 @@
 package com.xiezhenyu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.QuartzJob;
+import com.xiezhenyu.query.QuartzJobQuery;
 import com.xiezhenyu.response.CommonResult;
 import io.swagger.models.auth.In;
 
@@ -60,4 +62,17 @@ public interface TimerService {
      */
     CommonResult resumeTimer(QuartzJob quartzJob);
 
+    /**
+     * 定时任务分页
+     * @param quartzJobQuery
+     * @return
+     */
+    Page<QuartzJob> getPage(QuartzJobQuery quartzJobQuery);
+
+    /**
+     * 修改定时任务
+     * @param quartzJob
+     * @return
+     */
+    boolean updateQuartz(QuartzJob quartzJob);
 }

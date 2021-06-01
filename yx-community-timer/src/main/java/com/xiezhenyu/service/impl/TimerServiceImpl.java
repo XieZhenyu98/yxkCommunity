@@ -3,6 +3,7 @@ package com.xiezhenyu.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.QuartzJob;
 import com.xiezhenyu.manager.QuartzManage;
+import com.xiezhenyu.query.QuartzJobQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.service.QuartzJobService;
 import com.xiezhenyu.service.TimerService;
@@ -100,5 +101,19 @@ public class TimerServiceImpl implements TimerService {
             return CommonResult.errorCommonResult(e,"任务恢复失败");
         }
         return CommonResult.successCommonResult("任务恢复成功");
+    }
+
+    @Override
+    public Page<QuartzJob> getPage(QuartzJobQuery quartzJobQuery) {
+        Page<QuartzJob> page = quartzJobService.getPage(quartzJobQuery);
+        return page;
+    }
+
+    @Override
+    public boolean updateQuartz(QuartzJob quartzJob) {
+        stopTimer(quartzJob.getId());
+        quartzJob.setJobStatus(QuartzJob.STATUS_STOP);
+        quartzJobService.updateJob(quartzJob);
+        return true;
     }
 }

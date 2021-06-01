@@ -1,6 +1,8 @@
 package com.xiezhenyu.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.QuartzJob;
+import com.xiezhenyu.query.QuartzJobQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.service.TimerService;
 import io.swagger.annotations.Api;
@@ -25,7 +27,6 @@ public class TimerController {
     @ApiOperation(value = "启动定时任务", notes = "启动定时任务")
     @PostMapping("/start")
     public CommonResult startJob(@ApiParam(value = "定时任务id") @RequestBody QuartzJob quartzJob) {
-        System.out.println(quartzJob.getId());
         return timerService.startTimer(quartzJob.getId());
     }
 
@@ -49,7 +50,7 @@ public class TimerController {
     }
 
     @ApiOperation(value = "删除定时任务", notes = "删除定时任务")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public CommonResult deleteTimer(@ApiParam(value = "定时任务id") @PathVariable Integer id){
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
@@ -70,5 +71,19 @@ public class TimerController {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
         return timerService.resumeTimer(quartzJob);
+    }
+
+    @ApiOperation("定时任务分页")
+    @PostMapping("/page")
+    public CommonResult getPage(@ApiParam("查询实体类") @RequestBody QuartzJobQuery quartzJobQuery) {
+        Page<QuartzJob> page = timerService.getPage(quartzJobQuery);
+        return CommonResult.successCommonResult(page, "查询成功");
+    }
+
+    @ApiOperation("定时任务修改")
+    @PostMapping("/update")
+    public CommonResult updateTimer(@ApiParam("定时任务实体类") @RequestBody QuartzJob quartzJob) {
+        timerService.updateQuartz(quartzJob);
+        return CommonResult.successCommonResult("修改成功");
     }
 }

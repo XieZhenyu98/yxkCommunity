@@ -2,6 +2,7 @@ package com.xiezhenyu.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.QuartzJob;
+import com.xiezhenyu.query.QuartzJobQuery;
 import com.xiezhenyu.response.CommonResult;
 
 /**
@@ -47,4 +48,11 @@ public interface QuartzJobService {
      * @param id
      */
     void deleteJob(Integer id);
+
+    /**
+     * 定时任务分页
+     * @param quartzJobQuery
+     * @return
+     */
+    Page<QuartzJob> getPage(QuartzJobQuery quartzJobQuery);
 }

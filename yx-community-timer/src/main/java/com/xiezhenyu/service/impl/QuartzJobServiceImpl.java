@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiezhenyu.entity.QuartzJob;
 import com.xiezhenyu.manager.QuartzManage;
 import com.xiezhenyu.mapper.QuartzJobMapper;
+import com.xiezhenyu.query.QuartzJobQuery;
 import com.xiezhenyu.response.CommonResult;
 import com.xiezhenyu.service.QuartzJobService;
 import lombok.extern.slf4j.Slf4j;
@@ -93,6 +94,21 @@ public class QuartzJobServiceImpl implements QuartzJobService, CommandLineRunner
     @Override
     public void deleteJob(Integer id) {
         quartzJobMapper.deleteById(id);
+    }
+
+    @Override
+    public Page<QuartzJob> getPage(QuartzJobQuery quartzJobQuery) {
+        Page<QuartzJob> quartzJobPage = null;
+        if(quartzJobQuery.getTriggerType()!=null) {
+            quartzJobPage = quartzJobMapper.selectPage(new Page<>(quartzJobQuery.getPageNo(), quartzJobQuery.getPageSize()),
+                    new QueryWrapper<QuartzJob>()
+                            .like("name", quartzJobQuery.getName())
+                            .eq("trigger_type", quartzJobQuery.getTriggerType()));
+        }else {
+            quartzJobPage = quartzJobMapper.selectPage(new Page<>(quartzJobQuery.getPageNo(),quartzJobQuery.getPageSize()),
+                    new QueryWrapper<QuartzJob>().like("name",quartzJobQuery.getName()));
+        }
+        return quartzJobPage;
     }
 
 }
