@@ -23,7 +23,7 @@ public class CommonConfigServiceImpl implements ICommonConfigService {
 
     @Override
     public CommonConfigDo getByPrefixAndKey(String prefix, String key) {
-        CommonConfigDo commonConfigDo = commonConfigMapper.selectOne(new QueryWrapper<CommonConfigDo>().eq("prefix", prefix).eq("key", key));
+        CommonConfigDo commonConfigDo = commonConfigMapper.selectOne(new QueryWrapper<CommonConfigDo>().eq("prefix", prefix).eq("config_key", key));
         return commonConfigDo;
     }
 
